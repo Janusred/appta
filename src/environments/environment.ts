@@ -14,12 +14,12 @@ export const environment = {
   },
   production: false,
 
-  productoURL: 'http://27.0.173.180:8080/producto/',
-  proveedorURL: 'http://27.0.173.180:8080/proveedor/',
-  categoriaURL: 'http://27.0.173.180:8080/categoria/',
-  empleadoURL: 'http://27.0.173.180:8080/empleado/',
-  ventaURL: 'http://27.0.173.180:8080/venta/',
-  detalleVentaURL: 'http://27.0.173.180:8080/detalleVenta/'
+  productoURL: 'https://27.0.172.124:8080/producto/',
+  proveedorURL: 'https://27.0.172.124:8080/proveedor/',
+  categoriaURL: 'https://27.0.172.124:8080/categoria/',
+  empleadoURL: 'https://27.0.172.124:8080/empleado/',
+  ventaURL: 'https://27.0.172.124:8080/venta/',
+  detalleVentaURL: 'https://27.0.172.124:8080/detalleVenta/'
 };
 
 /*
