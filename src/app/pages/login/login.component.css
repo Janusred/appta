@@ -1,0 +1,11 @@
+form{
+    max-width: fit-content;
+    min-width: 40%;
+    background-color: white;
+    padding: 20px;
+    font-size: large;
+}
+.fondo {
+  background: linear-gradient(70deg, rgb(108, 196, 255), rgb(42, 62, 243));
+}
+

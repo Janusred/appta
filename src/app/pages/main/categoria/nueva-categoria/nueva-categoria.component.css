@@ -1,0 +1,9 @@
+.ng-select.custom .ng-select-container {
+    border-radius: 0;
+  }
+
+  button{
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  .ng-dropdown-panel { display: block !important; }

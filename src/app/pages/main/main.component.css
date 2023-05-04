@@ -1,0 +1,32 @@
+
+.fondo {
+  background: linear-gradient(70deg, rgb(108, 196, 255), rgb(42, 62, 243));
+}
+.option{
+    padding-top:4%;
+    padding-bottom:4%;
+    width: 30%;
+    min-width: 140px;
+    text-align: center;
+}
+
+h3{
+  max-width: 30%;
+    margin: 35px;
+
+}
+.principal{
+    padding: 1%;
+}
+
+span{
+  font-size:calc(12px + 1.5vw);
+  margin: 10px;
+}
+
+button{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

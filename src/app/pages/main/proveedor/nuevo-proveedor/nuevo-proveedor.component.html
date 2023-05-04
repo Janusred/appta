@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4 mx-auto">
+            <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required
+                        autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="empresa">Empresa</label>
+                    <input type="text" class="form-control" id="empresa" name="empresa" [(ngModel)]="empresa" required
+                        autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email" required
+                        autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Telefono</label>
+                    <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="telefono"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="direccion"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="ciudad">Ciudad</label>
+                    <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="ciudad" required
+                        autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="codigoPostal">Codigo postal</label>
+                    <input type="number" class="form-control" id="codigoPostal" name="codigoPostal"
+                        [(ngModel)]="codigoPostal" required autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+                    <i class="far fa-plus-square"></i> Crear</button>
+                <button class="btn btn-outline-primary btn-block" (click)="volver()"><i
+                        class="fas fa-arrow-alt-circle-left"></i> Volver</button>
+            </form>
+        </div>
+    </div>
+</div>

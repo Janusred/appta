@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" type="button" routerLink="/main">La tiendita de Iker TPV</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse w-100" id="navbar">
+            <ul class="navbar-nav ms-auto  ">
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="router.url === '/listaProducto'" routerLink="/nuevoProducto"><i
+                            class="far fa-list-alt"></i>
+                        Añadir producto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="router.url === '/listaProveedor'" routerLink="/nuevoProveedor"><i
+                            class="far fa-list-alt"></i>
+                        Añadir proveedor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="router.url === '/listaCategoria'" routerLink="/nuevaCategoria"><i
+                            class="far fa-list-alt"></i>
+                        Añadir categoria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="router.url === '/listaEmpleado'" routerLink="/nuevoEmpleado"><i
+                            class="far fa-list-alt"></i>
+                        Añadir empleado</a>
+                </li>
+
+                <li class="nav-item ml-3">
+                    <a class="nav-link" (click)="onClick()" type="button"><i
+                            class=" fa-solid fa-right-from-bracket"></i> Cerrar
+                        sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

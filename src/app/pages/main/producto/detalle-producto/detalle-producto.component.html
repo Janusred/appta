@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+<!-- <div class="container">
+    <div class="row mt-5" *ngIf="producto">
+        <div class="col-md-4 mx-auto">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header text-center">
+                    Detalle
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>ID: </b>{{producto.id}}</li>
+                    <li class="list-group-item"><b>Nombre: </b>{{producto.nombre}}</li>
+                    <li class="list-group-item"><b>Precio: </b>{{producto.precio}}€</li>
+                    <li class="list-group-item"><b>Id Categoria: </b>{{producto.idCategoria}}</li>
+                    <li class="list-group-item"><b>Id Proveedor: </b>{{producto.idProveedor}}</li>
+                </ul>
+                <div class="card-footer">
+                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i
+                            class="fas fa-arrow-alt-circle-left"></i> Volver</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<dx-scroll-view class="scroll-viewer">
+    <div class="row flex-wrap principal">
+        <div class=" col seccion">
+            <dx-form class="form" *ngIf="producto" labelMode="floating" [formData]="producto">
+                <dxi-item itemType="group">
+                    <dxi-item itemType="group" caption="PRODUCTO">
+                        <dxi-item dataField="id" editorType=" dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="ID"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="nombre" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Nombre"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="precio" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Precio"></dxo-label>
+                        </dxi-item>
+                        <dxi-item itemType="group" [colCount]="2">
+                            <dxi-item dataField="idCategoria" editorType="dxTextBox"
+                                [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                                <dxo-label [visible]="false" text="ID Categoria"></dxo-label>
+                            </dxi-item>
+                            <dxi-item dataField="idProveedor" editorType="dxTextBox"
+                                [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                                <dxo-label [visible]="false" text="ID Proveedor"></dxo-label>
+                            </dxi-item>
+                        </dxi-item>
+                    </dxi-item>
+                </dxi-item>
+            </dx-form>
+            <dx-form class="form" *ngIf="categoria" labelMode="floating" [formData]="categoria">
+                <dxi-item itemType="group">
+                    <dxi-item itemType="group" caption="CATEGORIA">
+                        <dxi-item dataField="id" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="ID"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="nombre" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Nombre"></dxo-label>
+                        </dxi-item>
+                    </dxi-item>
+                </dxi-item>
+            </dx-form>
+        </div>
+        <div class="col seccion">
+            <dx-form class="form" *ngIf="producto" labelMode="floating" [formData]="proveedor">
+                <dxi-item itemType="group">
+                    <dxi-item itemType="group" caption="PROVEEDOR">
+                        <dxi-item dataField="id" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="ID"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="nombre" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Nombre"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="empresa" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Empresa"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="email" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Email"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="telefono" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Telefono"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="direccion" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Dirección"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="ciudad" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Ciudad"></dxo-label>
+                        </dxi-item>
+                        <dxi-item dataField="codigoPostal" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                            <dxo-label [visible]="false" text="Codigo postal"></dxo-label>
+                        </dxi-item>
+                    </dxi-item>
+                </dxi-item>
+            </dx-form>
+        </div>
+
+    </div>
+
+
+</dx-scroll-view>

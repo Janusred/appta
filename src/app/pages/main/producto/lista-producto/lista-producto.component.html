@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<dx-data-grid class="dataGrid" [dataSource]="productos" [height]="'calc(100vh - 96px)'"
+  (onRowDblClick)="mostrarDetalle($event)" [remoteOperations]="true" [showBorders]="true"
+  noDataText="No hay ningun producto registrado" [columnAutoWidth]="true" [allowColumnResizing]="true"
+  [allowColumnReordering]="true" [columnHidingEnabled]="true" [hoverStateEnabled]="true" [wordWrapEnabled]="true"
+  style="margin:20px; user-select: none;">
+  <dxo-selection mode="single"></dxo-selection>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
+  <dxo-load-panel text="" [showPane]="false"></dxo-load-panel>
+  <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false">
+  </dxo-editing>
+  <dxi-column dataField="id"></dxi-column>
+  <dxi-column dataField="nombre"></dxi-column>
+  <dxi-column dataField="precio"></dxi-column>
+  <dxi-column dataField="idProveedor"></dxi-column>
+  <dxi-column dataField="idCategoria"></dxi-column>
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
+</dx-data-grid>
+<div class="container" *ngIf="listaVacia">
+  <div class="p-3 mb-2 bg-dark text-white text-center">
+    <h2>{{listaVacia}}</h2>
+  </div>
+</div>

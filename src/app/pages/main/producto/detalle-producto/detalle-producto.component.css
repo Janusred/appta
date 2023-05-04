@@ -1,0 +1,17 @@
+.principal {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Valor predeterminado: los elementos no se envolverán */
+}
+
+@media (max-width: 1920px) {
+    .principal {
+        flex-wrap: wrap;
+        /* Los elementos se envolverán en la siguiente línea */
+    }
+}
+
+.seccion {
+    margin: 30px;
+    min-width: 250px;
+}

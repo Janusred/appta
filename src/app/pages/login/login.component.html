@@ -1,0 +1,33 @@
+<body class="fondo">
+    <div class="container min vh-100 d-flex justify-content-center align-items-center ">
+
+        <form class="border rounded" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+
+            <h3 class="text-center pt-3"><img src="../../../assets/images/pngwing.com.png" width="15%"
+                    class="m-3">ProyectoTPV</h3>
+            <div class="form-floating mb-3 ">
+                <input type="email" class="form-control" id="floatingInput" formControlName="email">
+                <label for="floatingInput"><img src="../../../assets/images/user.png"> <span>Email</span></label>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input type="password" class="form-control" id="floatingPassword" formControlName="password">
+                <label for="floatingPassword"><img src="../../../assets/images/password.png"> Contraseña</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label> Recordarme</label>
+            </div>
+            <button type="submit" id="loginButton" class="btn btn-primary w-100 mb-2">
+                <span class="spinner-border spinner-border-sm" id="spinner" role="status" aria-hidden="true"
+                    hidden></span>
+                Acceder
+            </button>
+        </form>
+        <div class="card justify-content-center">
+            <p-toast class="errorToast" position="bottom-center"
+                [breakpoints]="{'920px': {width: '80%', left: '50%'}}"></p-toast>
+        </div>
+    </div>
+
+</body>

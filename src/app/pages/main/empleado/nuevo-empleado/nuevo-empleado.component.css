@@ -1,0 +1,8 @@
+button {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.ng-dropdown-panel {
+  display: block !important;
+}

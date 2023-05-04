@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container" *ngIf="producto">
+    <div class="row mt-5">
+        <div class="col-md-4 mx-auto">
+            <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="producto.nombre"
+                        required autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input type="number" class="form-control" id="precio" name="precio" [(ngModel)]="producto.precio"
+                        required autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <label for="proveedor">Proveedor</label>
+                    <ng-select name="proveedor" [items]="proveedores" bindLabel="nombre" bindValue="id"
+                        [ngModelOptions]="{ standalone: true }" [(ngModel)]="producto.idProveedor"
+                        placeholder="Selecciona el proveedor" searchBy="nombre"
+                        notFoundText="No se ha encontrado ningun proveedor">
+                        <ng-option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre
+                            }}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <ng-select name="categoria" class="custom" [items]="categorias" bindLabel="nombre" bindValue="id"
+                        [ngModelOptions]="{ standalone: true }" [(ngModel)]="producto.idCategoria"
+                        placeholder="Selecciona la categoria" searchBy="nombre"
+                        notFoundText="No se ha encontrado ninguna categoria">
+                        <ng-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre
+                            }}</ng-option>
+                    </ng-select>
+                </div>
+                <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+                    <i class="fas fa-edit"></i> Actualizar
+                </button>
+                <button class="btn btn-outline-primary btn-block" (click)="volver()">
+                    <i class="fas fa-arrow-alt-circle-left"></i> Volver
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

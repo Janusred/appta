@@ -1,0 +1,322 @@
+.dxbox {
+    background-color: #F2F2F2;
+}
+
+.seccion {
+    border: 2px solid #0DCAF0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+
+/* Estilo de todos los botones de la vista */
+.productButtons {
+    aspect-ratio: 1;
+    margin: 10px;
+    width: calc(2vw + 70px);
+    text-align: center;
+
+}
+
+.employeesButtons {
+    aspect-ratio: 1;
+    width: calc(6vw + 70px);
+    margin: 10px;
+}
+
+.chargeTypeButtons {
+    width: 80%;
+    margin: 30px;
+    padding: calc(1vw - 15px);
+    font-size: calc(1px + 2vw);
+}
+
+/* Resolucion general para todas las pantallas que tengan un alto de mas de 1200 pixeles */
+@media (min-height: 1200px) {
+    .paymentButtons {
+        width: 78%;
+        height: 80px;
+        margin-top: 10px;
+    }
+
+    .keyboardButtons {
+        border: 2px solid #31D2F2;
+        min-width: 25%;
+        width: auto;
+        aspect-ratio: 1;
+        margin: 5px;
+        height: 7vw;
+    }
+
+    .checkoutButton {
+        aspect-ratio: 3;
+        width: 47%;
+        margin: 2px;
+        height: calc(7vw + 4px);
+        font-size: calc(1px + 1vw);
+    }
+}
+
+/* Ajuste del tamaño de los elementos desde los 1200 pixeles de alto, hasta los 576 */
+@media (max-height: 1200px) {
+    .paymentButtons {
+        width: 78%;
+        height: 70px;
+        margin-top: 10px;
+    }
+
+    .keyboardButtons {
+        border: 2px solid #31D2F2;
+        min-width: 25%;
+        width: auto;
+        aspect-ratio: 1;
+        margin: 5px;
+        height: 110px;
+    }
+
+    .checkoutButton {
+        aspect-ratio: 3;
+        width: 47%;
+        margin: 2px;
+        height: 114px;
+        font-size: calc(1px + 1vw);
+    }
+}
+
+@media (max-height: 1080px) {
+
+    .paymentButtons {
+        width: 78%;
+        height: 60px;
+        margin-top: 10px;
+    }
+
+    .keyboardButtons {
+        border: 2px solid #31D2F2;
+        min-width: 25%;
+        width: auto;
+        aspect-ratio: 1;
+        margin: 5px;
+        height: 85px;
+    }
+
+    .checkoutButton {
+        aspect-ratio: 3;
+        width: 47%;
+        margin: 2px;
+        height: 89px;
+        font-size: calc(1px + 1vw);
+    }
+
+
+    @media (max-height: 900px) {
+
+        .paymentButtons {
+            width: 78%;
+            height: 50px;
+            margin-top: 10px;
+        }
+
+        .keyboardButtons {
+            border: 2px solid #31D2F2;
+            min-width: 25%;
+            width: auto;
+            aspect-ratio: 1;
+            margin: 5px;
+            height: 75px;
+        }
+
+        .checkoutButton {
+            aspect-ratio: 3;
+            width: 47%;
+            margin: 2px;
+            height: 79px;
+            font-size: calc(1px + 1vw);
+        }
+    }
+
+
+    @media (max-height: 850px) {
+        .paymentButtons {
+            width: 78%;
+            height: 40px;
+            margin-top: 10px;
+        }
+
+        .keyboardButtons {
+            border: 2px solid #31D2F2;
+            min-width: 25%;
+            width: auto;
+            aspect-ratio: 1;
+            margin: 5px;
+            height: 60px;
+        }
+
+        .checkoutButton {
+            aspect-ratio: 3;
+            width: 47%;
+            margin: 2px;
+            height: 64px;
+            font-size: calc(1px + 1vw);
+        }
+    }
+
+    @media (max-height: 800px) {
+        .keyboardButtons {
+            border: 2px solid #31D2F2;
+            min-width: 25%;
+            width: auto;
+            aspect-ratio: 1;
+            margin: 5px;
+            height: 60px;
+        }
+
+        .checkoutButton {
+            aspect-ratio: 3;
+            width: 47%;
+            margin: 2px;
+            height: 64px;
+            font-size: calc(1px + 1vw);
+        }
+    }
+
+    @media (max-height: 768px) {
+        .keyboardButtons {
+            border: 2px solid #31D2F2;
+            min-width: 25%;
+            width: auto;
+            aspect-ratio: 1;
+            margin: 5px;
+            height: 55px;
+        }
+
+        .checkoutButton {
+            aspect-ratio: 3;
+            width: 47%;
+            margin: 2px;
+            height: 59px;
+            font-size: calc(1px + 1vw);
+        }
+    }
+
+    @media (max-height: 720px) {
+        .paymentButtons {
+            width: 78%;
+            height: 40px;
+            margin-top: 10px;
+        }
+
+        .keyboardButtons {
+            border: 2px solid #31D2F2;
+            min-width: 25%;
+            width: auto;
+            aspect-ratio: 1;
+            margin: 5px;
+            height: 52px;
+        }
+
+        .checkoutButton {
+            aspect-ratio: 3;
+            width: 47%;
+            margin: 2px;
+            height: 56px;
+            font-size: calc(1px + 1vw);
+        }
+    }
+
+
+    @media (max-height: 576px),
+    (max-height: 600px) {
+        .paymentButtons {
+            width: 78%;
+            height: 25px;
+            margin-top: 10px;
+        }
+
+        .keyboardButtons {
+            border: 2px solid #31D2F2;
+            min-width: 24%;
+            width: auto;
+            aspect-ratio: 1;
+            margin: 5px;
+            height: 32px;
+
+        }
+
+        .checkoutButton {
+            aspect-ratio: 3;
+            width: 46%;
+            margin: 2px;
+            height: 37px;
+            font-size: calc(1px + 1vw);
+        }
+    }
+
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#titulo {
+    margin: 2%;
+}
+
+
+
+.productName,
+.productCategory {
+    font-size: calc(1px + 1vw);
+    margin: 10px;
+}
+
+.chargeTypes {
+    font-size: calc(1px + 2vw);
+    font-weight: bold;
+}
+
+#subtotal {
+    font-size: calc(1px + 1vw);
+    margin: 20px;
+    padding: 10px;
+    border: 2px solid black
+}
+
+#precio {
+    float: right;
+    font-size: calc(1px + 1vw);
+    font-weight: bold;
+}
+
+
+
+.principal {
+    margin: auto;
+
+}
+
+
+.precioTotalStyle {}
+
+#registeredEmployee {
+    margin: 20px;
+    font-size: medium;
+    border: 2px solid black;
+    padding: 10px;
+    font-size: calc(1px + 1vw);
+}
+
+#registeredEmployeePopup {
+    margin: 20px;
+
+    font-size: calc(1px + 1vw);
+}
+
+.errorPendiente {
+    border: 3px solid red;
+}

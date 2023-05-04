@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row mt-5" *ngIf="proveedor">
+        <div class="col-md-4 mx-auto">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header text-center">
+                    Detalle
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>ID: </b>{{proveedor.id}}</li>
+                    <li class="list-group-item"><b>Nombre: </b>{{proveedor.nombre}}</li>
+                    <li class="list-group-item"><b>Empresa: </b>{{proveedor.empresa}}</li>
+                    <li class="list-group-item"><b>Email: </b>{{proveedor.email}}</li>
+                    <li class="list-group-item"><b>Telefono: </b>{{proveedor.telefono}}</li>
+                    <li class="list-group-item"><b>Direccion: </b>{{proveedor.direccion}}</li>
+                    <li class="list-group-item"><b>Ciudad: </b>{{proveedor.ciudad}}</li>
+                    <li class="list-group-item"><b>Codigo postal: </b>{{proveedor.codigoPostal}}</li>
+                </ul>
+                <div class="card-footer">
+                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i
+                            class="fas fa-arrow-alt-circle-left"></i> Volver</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
