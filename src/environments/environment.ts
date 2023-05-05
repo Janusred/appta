@@ -15,7 +15,7 @@ export const environment = {
   production: false,
 
   productoURL: 'https://mycloudtpv.hopto.org:8080/producto/',
-  proveedorURL: 'https://mycloudtpv.hopto.org:8080/proveedor',
+  proveedorURL: 'https://mycloudtpv.hopto.org:8080/proveedor/',
   categoriaURL: 'https://mycloudtpv.hopto.org:8080/categoria/',
   empleadoURL: 'https://mycloudtpv.hopto.org:8080/empleado/',
   ventaURL: 'https://mycloudtpv.hopto.org:8080/venta/',
