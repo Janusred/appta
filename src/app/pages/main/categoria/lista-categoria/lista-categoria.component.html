@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <dx-data-grid [dataSource]="categorias" [height]="'calc(100vh - 96px)'" (onRowDblClick)="mostrarDetalle($event)"
-  [remoteOperations]="true" [showBorders]="true" noDataText="No hay ninguna categoria registrada"
-  [columnAutoWidth]="true" [allowColumnResizing]="true" [allowColumnReordering]="true" [columnHidingEnabled]="true"
-  [hoverStateEnabled]="true" [wordWrapEnabled]="true" style="margin:20px; user-select: none;">
+  [remoteOperations]="true" [showBorders]="true" noDataText="" [columnAutoWidth]="true" [allowColumnResizing]="true"
+  [allowColumnReordering]="true" [columnHidingEnabled]="true" [hoverStateEnabled]="true" [wordWrapEnabled]="true"
+  style="margin:20px; user-select: none;">
   <dxo-selection mode="single"></dxo-selection>
   <dxo-sorting mode="multiple"></dxo-sorting>
 
