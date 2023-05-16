@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DxBoxModule, DxDataGridModule, DxFormModule, DxPopupModule } from 'devextreme-angular';
+import { DxBoxModule, DxDataGridModule, DxFormModule, DxNumberBoxModule, DxPopupModule, DxTextBoxModule } from 'devextreme-angular';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from '../../../services/producto.service';
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Venta } from 'src/app/models/venta';
 import { ToastrService } from 'ngx-toastr';
+import { CommaExpr } from '@angular/compiler';
+
 
 
 
@@ -30,8 +32,9 @@ import { ToastrService } from 'ngx-toastr';
     DxPopupModule,
     DxFormModule,
     DxBoxModule,
-    FormsModule
-
+    FormsModule,
+    DxNumberBoxModule,
+    DxTextBoxModule
   ]
 })
 export class CajaCobroComponent {
@@ -66,9 +69,9 @@ export class CajaCobroComponent {
   // El dinero que queda pendiente de cobrar, por defecto, si es efectivo sera el precio total.
   pendienteCobroTarjeta: number = 0;
   // El dinero efectivo que se ha entregado
-  entregadoCobroEfectivo: number | null = null;
+  entregadoCobroEfectivo: number = 0;
   // El dinero efectivo que se ha entregado, por defecto, sera el precio total.
-  entregadoCobroTarjeta: number | null = null;
+  entregadoCobroTarjeta: number = 0;
   //El empleado que se mostrara en el popup de pago.
   nombreEmpleadoPopup = "";
   // Establece la visibilidad del popup de cobro a false
@@ -253,7 +256,7 @@ export class CajaCobroComponent {
     this.cashPaymentPopupVisible = false;
     this.pendienteCobroEfectivo = 0;
     this.cambioCobro = 0;
-    this.entregadoCobroEfectivo = null;
+    this.entregadoCobroEfectivo = 0;
   }
 
   // Muestra la ventana emergente al hacer click pago en efectivo.
@@ -262,6 +265,7 @@ export class CajaCobroComponent {
     if (cuadroPendienteTarjeta?.classList.contains("errorPendiente")) {
       cuadroPendienteTarjeta?.classList.remove("errorPendiente");
     }
+    this.pendienteCobroEfectivo = 0;
     this.cardPaymentPopupTitle = "Empleado: " + this.empleadoRegistrado!.nombre;
     this.cardPaymentPopupVisible = true;
     let precioTotal = parseFloat(this.precioTotal.replace(",", ".").replace("€", ""));
@@ -275,7 +279,7 @@ export class CajaCobroComponent {
     this.pendienteCobroEfectivo = 0;
     this.pendienteCobroTarjeta = 0;
     this.cambioCobro = 0;
-    this.entregadoCobroEfectivo = null;
+    this.entregadoCobroEfectivo = 0;
   }
   //Almacena el empleado seleccionado para poder realizar el cobro.
   registrarEmpleado(empleado: Empleado) {
@@ -310,7 +314,12 @@ export class CajaCobroComponent {
   }
 
   // Actualiza en el tipo de pago efectivo el precio pendiente de cobro y en caso de que el entregado sea mayor al precio total, actualiza el cambio.
-  actualizarPrecioEfectivo() {
+  actualizarPrecioEfectivo(e: any) {
+    if (typeof (e.target.value != 'number')) {
+      const valorSinFormato = parseFloat(e.target.value);
+      this.entregadoCobroEfectivo = valorSinFormato;
+    }
+
     let cuadroPendiente = document.getElementById("pendienteItemEfectivo");
     if (this.pendienteCobroEfectivo == 0) {
       cuadroPendiente?.classList.remove("errorPendiente");
@@ -336,8 +345,67 @@ export class CajaCobroComponent {
     }
   }
 
+  actualizarPrecioEfectivoTeclado(pendiente: number) {
+
+    this.entregadoCobroEfectivo = pendiente;
+    let cuadroPendiente = document.getElementById("pendienteItemEfectivo");
+    if (this.pendienteCobroEfectivo == 0) {
+      cuadroPendiente?.classList.remove("errorPendiente");
+    }
+
+    let precioTotal = parseFloat(this.precioTotal.replace(",", ".").replace("€", ""));
+
+    this.pendienteCobroEfectivo = precioTotal - this.entregadoCobroEfectivo!;
+    if (this.entregadoCobroEfectivo == null) {
+      this.pendienteCobroEfectivo = precioTotal;
+      this.cambioCobro = 0;
+
+    } else {
+      if ((this.entregadoCobroEfectivo - precioTotal) > 0) {
+        this.cambioCobro = this.entregadoCobroEfectivo - precioTotal;
+        this.pendienteCobroEfectivo = 0;
+      } else {
+        this.cambioCobro = 0;
+      }
+    }
+    if (this.pendienteCobroEfectivo == 0) {
+      cuadroPendiente?.classList.remove("errorPendiente");
+    }
+  }
+
+  actualizarPrecioTarjetaTeclado(pendiente: number) {
+
+    this.entregadoCobroTarjeta = pendiente;
+    let cuadroPendiente = document.getElementById("pendienteItemTarjeta");
+    if (this.pendienteCobroTarjeta == 0) {
+      cuadroPendiente?.classList.remove("errorPendiente");
+    }
+    let precioTotal = parseFloat(this.precioTotal.replace(",", ".").replace("€", ""));
+    this.pendienteCobroTarjeta = precioTotal - this.entregadoCobroTarjeta!;
+    if (this.entregadoCobroTarjeta == null) {
+      this.pendienteCobroTarjeta = precioTotal;
+      this.cambioCobro = 0;
+
+    } else {
+      if ((this.entregadoCobroTarjeta - precioTotal) > 0) {
+        this.cambioCobro = this.entregadoCobroTarjeta - precioTotal;
+        this.pendienteCobroTarjeta = 0;
+      } else {
+        this.cambioCobro = 0;
+      }
+    }
+    if (this.pendienteCobroEfectivo == 0) {
+      cuadroPendiente?.classList.remove("errorPendiente");
+    }
+  }
   // Actualiza en el tipo de pago efectivo el precio pendiente de cobro y en caso de que el entregado sea mayor al precio total, actualiza el cambio.
-  actualizarPrecioTarjeta() {
+  actualizarPrecioTarjeta(e: any) {
+    debugger
+    if (typeof (e.target.value != 'number')) {
+      const valorSinFormato = parseFloat(e.target.value);
+      this.entregadoCobroTarjeta = valorSinFormato;
+    }
+
     let cuadroPendiente = document.getElementById("pendienteItemTarjeta");
     if (this.pendienteCobroTarjeta == 0) {
       cuadroPendiente?.classList.remove("errorPendiente");
@@ -362,6 +430,7 @@ export class CajaCobroComponent {
   }
 
   crearVenta(): void {
+    debugger
     let cuadroPendienteEfectivo = document.getElementById("pendienteItemEfectivo");
     let cuadroPendienteTarjeta = document.getElementById("pendienteItemTarjeta");
 
@@ -382,7 +451,7 @@ export class CajaCobroComponent {
       this.ventaService.save(venta).subscribe(
         data => {
           this.toastr.success(data.message, 'OK', {
-            timeOut: 3000, positionClass: 'toast-top-center'
+            timeOut: 3000, positionClass: 'toast-bottom-left'
           });
           if (this.cashPaymentPopupVisible) {
             this.cashPaymentPopupHiding();
@@ -401,8 +470,8 @@ export class CajaCobroComponent {
           }
         },
         err => {
-          this.toastr.error(err.error.message, 'Fail', {
-            timeOut: 3000, positionClass: 'toast-top-center',
+          this.toastr.error(err.error.message, 'Error', {
+            timeOut: 3000, positionClass: 'toast-bottom-left',
           });
         }
       );
@@ -424,7 +493,10 @@ export class CajaCobroComponent {
     this.employeePopupVisible = true;
   }
   //Registra que tecla se ha tocado en el teclado en pantalla y simula la pulsacion de esta en el teclado.
+
   accionesTecladoPantalla(e: any) {
+    debugger
+    let valorBoton;
     let input;
     if (this.cashPaymentPopupVisible) {
       input = document.getElementById('cobroEfectivo') as HTMLInputElement;
@@ -435,68 +507,55 @@ export class CajaCobroComponent {
     if (input) {
       input.focus();
       switch (e.target.value) {
-        case '1':
-          input.value += '1';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '2':
-          input.value += '2';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '3':
-          input.value += '3';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '4':
-          input.value += '4';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '5':
-          input.value += '5';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '6':
-          input.value += '6';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '7':
-          input.value += '7';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '8':
-          input.value += '8';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case '9':
-          input.value += '9';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
-        case ',':
-          if (!input.value.includes(".")) {
-            input.value += '.';
-            input.dispatchEvent(new Event('input'));
-            input.dispatchEvent(new Event('change'));
-          }
-          break;
         case '0':
-          input.value += '0';
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+
+          if (this.cashPaymentPopupVisible) {
+            valorBoton = e.target.value;
+            const valor = parseFloat(this.entregadoCobroEfectivo.toString() + valorBoton);
+            this.actualizarPrecioEfectivoTeclado(valor);
+
+          } else if (this.cardPaymentPopupVisible) {
+            valorBoton = e.target.value;
+            const valor = parseFloat(this.entregadoCobroTarjeta.toString() + valorBoton);
+            this.actualizarPrecioTarjetaTeclado(valor);
+          }
+
+          break;
+        case 'comma':
+
           break;
         case 'delete':
-          input.value = input.value.slice(0, -1);
-          input.dispatchEvent(new Event('input'));
-          input.dispatchEvent(new Event('change'));
-          break;
+          if (this.cashPaymentPopupVisible) {
+            let valorBorrado;
+            if (this.entregadoCobroEfectivo.toString().length == 1) {
+              valorBorrado = 0;
+              this.actualizarPrecioEfectivoTeclado(valorBorrado);
+            } else {
+              valorBorrado = parseInt(this.entregadoCobroEfectivo.toString().slice(0, -1));
+              this.actualizarPrecioEfectivoTeclado(valorBorrado);
+            }
+
+          } else if (this.cardPaymentPopupVisible) {
+            let valorBorrado;
+            if (this.entregadoCobroTarjeta.toString().length == 1) {
+              valorBorrado = 0;
+              this.actualizarPrecioTarjetaTeclado(valorBorrado);
+            } else {
+              valorBorrado = parseInt(this.entregadoCobroTarjeta.toString().slice(0, -1));
+              this.actualizarPrecioTarjetaTeclado(valorBorrado);
+            }
+          }
+
+
       }
     }
 

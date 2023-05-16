@@ -49,34 +49,7 @@ export class ListaProveedorComponent implements OnInit {
     const idProveedor = e.data.id;
     this.router.navigate(['/detalleProveedor/', idProveedor])
   }
-  borrar(id: number): void {
-    Swal.fire({
-      title: '¿Estás seguro?, Se eliminaran TODOS los productos asignados a este proveedor',
-      text: 'Esta opción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Volver'
-    }).then((result) => {
-      if (result.value) {
-        this.proveedorService.delete(id).subscribe(res => this.cargarProveedores(),
-          error => { });
-        Swal.fire(
-          'OK',
-          'El proveedor y todos sus productos han sido eliminados',
-          'success'
-        );
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'El proveedor no se ha eliminado',
-          'error'
-        );
-      }
-    });
-  }
+
 
 
 }

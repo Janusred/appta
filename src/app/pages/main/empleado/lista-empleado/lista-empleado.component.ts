@@ -38,8 +38,8 @@ export class ListaEmpleadoComponent implements OnInit {
     this.cargarEmpleados();
   }
   mostrarDetalle(e: any) {
-    const idEmpleado = e.data.id;
-    this.router.navigate(['/detalleEmpleado/', idEmpleado])
+    const codEmpleado = e.data.codEmpleado;
+    this.router.navigate(['/detalleEmpleado/', codEmpleado])
   }
   cargarEmpleados(): void {
     this.empleadoService.lista().subscribe(
@@ -51,38 +51,6 @@ export class ListaEmpleadoComponent implements OnInit {
         this.listaVacia = err.error.message;
       }
     );
-  }
-
-  borrar(id: number): void {
-    Swal.fire({
-      title: '¿Estás seguro?, Se eliminara el empleado seleccionado',
-      text: 'Esta opción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Volver'
-    }).then((result) => {
-      if (result.value) {
-        this.empleadoService.delete(id).subscribe(res => this.cargarEmpleados(),
-          error => {
-            // Capturar el error y mostrar un mensaje personalizado
-          });
-
-        Swal.fire(
-          'OK',
-          'El empleado ha  sido eliminado ',
-          'success'
-        );
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'El empleado no se ha eliminado',
-          'error'
-        );
-      }
-    });
   }
 
 

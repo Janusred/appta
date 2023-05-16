@@ -1,21 +1,26 @@
 <app-navbar></app-navbar>
-<div class="container">
-    <div class="row mt-5" *ngIf="categoria">
-        <div class="col-md-4 mx-auto">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header text-center">
-                    Detalle
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>ID: </b>{{categoria.id}}</li>
-                    <li class="list-group-item"><b>Nombre: </b>{{categoria.nombre}}</li>
-                </ul>
-                <div class="card-footer">
-                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i
-                            class="fas fa-arrow-alt-circle-left"></i> Volver</button>
-                </div>
-            </div>
 
-        </div>
-    </div>
+<div class="center">
+    <dx-form class="form" *ngIf="categoria" labelMode="floating" [formData]="categoria" style="margin-top: 10px;">
+        <dxi-item itemType="group">
+            <dxi-item itemType="group" caption="CATEGORIA">
+                <dxi-item dataField="id" editorType="dxTextBox"
+                    [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                    <dxo-label [visible]="false" text="ID"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="nombre" editorType="dxTextBox"
+                    [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                    <dxo-label [visible]="false" text="Nombre"></dxo-label>
+                </dxi-item>
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+    <button class="btn form-button"
+        style="background-color: #FFCA2C; width: 100%; border: 1px solid black; margin-top: 10px; max-width: 1000px;"
+        (click)="modificarCategoria(categoria!.id)">Modificar
+        categoría</button>
+    <button class="btn form-button"
+        style="background-color: #f33b4d; width: 100%; border: 1px solid black; margin-top: 10px; max-width: 1000px;"
+        (click)="borrarCategoria(categoria!.id)">Eliminar
+        categoría</button>
 </div>

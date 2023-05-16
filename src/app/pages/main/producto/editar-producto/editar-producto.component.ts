@@ -52,8 +52,8 @@ export class EditarProductoComponent implements OnInit {
         this.producto = data;
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
         this.router.navigate(['/listaProducto']);
       }
@@ -83,24 +83,27 @@ export class EditarProductoComponent implements OnInit {
     );
   }
   onUpdate(): void {
+    const idProducto: number = this.producto!.id;
     const id = this.activatedRoute.snapshot.params['id'];
     this.productoService.update(id, this.producto!).subscribe(
       data => {
         this.toastr.success(data.message, 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+          timeOut: 3000, positionClass: 'toast-bottom-left'
         });
-        this.router.navigate(['/listaProducto']);
+
+        this.router.navigate(['/detalleProducto/', idProducto])
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error, no se ha modificado el producto', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
       }
     );
   }
 
   volver(): void {
-    this.router.navigate(['/listaProducto']);
+    const idProducto: number = this.producto!.id;
+    this.router.navigate(['/detalleProducto/', idProducto])
   }
 
 }

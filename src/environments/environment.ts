@@ -14,12 +14,19 @@ export const environment = {
   },
   production: false,
 
-  productoURL: 'https://mycloudtpv.hopto.org:8080/producto/',
-  proveedorURL: 'https://mycloudtpv.hopto.org:8080/proveedor/',
-  categoriaURL: 'https://mycloudtpv.hopto.org:8080/categoria/',
-  empleadoURL: 'https://mycloudtpv.hopto.org:8080/empleado/',
-  ventaURL: 'https://mycloudtpv.hopto.org:8080/venta/',
-  detalleVentaURL: 'https://mycloudtpv.hopto.org:8080/detalleVenta/'
+  // productoURL: 'https://mycloudtpv.hopto.org:8080/producto/',
+  // proveedorURL: 'https://mycloudtpv.hopto.org:8080/proveedor/',
+  // categoriaURL: 'https://mycloudtpv.hopto.org:8080/categoria/',
+  // empleadoURL: 'https://mycloudtpv.hopto.org:8080/empleado/',
+  // ventaURL: 'https://mycloudtpv.hopto.org:8080/venta/',
+  // detalleVentaURL: 'https://mycloudtpv.hopto.org:8080/detalleVenta/'
+
+  productoURL: 'http://localhost:8080/producto/',
+  proveedorURL: 'http://localhost:8080/proveedor/',
+  categoriaURL: 'http://localhost:8080/categoria/',
+  empleadoURL: 'http://localhost:8080/empleado/',
+  ventaURL: 'http://localhost:8080/venta/',
+  detalleVentaURL: 'http://localhost:8080/detalleVenta/'
 };
 
 /*

@@ -41,13 +41,13 @@ export class NuevaCategoriaComponent implements OnInit {
     this.categoriaService.save(categoria).subscribe(
       data => {
         this.toastr.success(data.message, 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+          timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/listaCategoria']);
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
       }
     );

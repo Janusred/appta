@@ -83,13 +83,13 @@ export class NuevoProductoComponent implements OnInit {
     this.productoService.save(producto).subscribe(
       data => {
         this.toastr.success(data.message, 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+          timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/listaProducto']);
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
       }
     );

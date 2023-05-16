@@ -35,8 +35,8 @@ export class EditarProveedorComponent implements OnInit {
         this.proveedor = data;
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
         this.router.navigate(['/listaProveedor']);
       }
@@ -44,17 +44,18 @@ export class EditarProveedorComponent implements OnInit {
   }
 
   onUpdate(): void {
+    const idProveedor: number = this.proveedor!.id;
     const id = this.activatedRoute.snapshot.params['id'];
     this.proveedorService.update(id, this.proveedor!).subscribe(
       data => {
         this.toastr.success(data.message, 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+          timeOut: 3000, positionClass: 'toast-bottom-left'
         });
-        this.router.navigate(['/listaProveedor']);
+        this.router.navigate(['/detalleProveedor/', idProveedor])
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
       }
     );

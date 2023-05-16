@@ -36,8 +36,8 @@ export class EditarEmpleadoComponent implements OnInit {
         this.empleado = data;
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
         this.router.navigate(['/listaEmpleado']);
       }
@@ -45,17 +45,18 @@ export class EditarEmpleadoComponent implements OnInit {
   }
 
   onUpdate(): void {
+    const codEmpleado = this.empleado!.codEmpleado;
     const id = this.activatedRoute.snapshot.params['id'];
     this.empleadoService.update(id, this.empleado!).subscribe(
       data => {
         this.toastr.success(data.message, 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+          timeOut: 3000, positionClass: 'toast-bottom-left'
         });
-        this.router.navigate(['/listaEmpleado']);
+        this.router.navigate(['/detalleEmpleado/', codEmpleado])
       },
       err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        this.toastr.error(err.error.message, 'Error', {
+          timeOut: 3000, positionClass: 'toast-bottom-left',
         });
       }
     );

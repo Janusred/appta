@@ -1,12 +1,12 @@
 export class Empleado {
-    id?: any;
-    nombre: string;
     codEmpleado: number;
+    nombre: string;
 
 
-    constructor(nombre: string, codEmpleado: number) {
-        this.nombre = nombre;
+    constructor(codEmpleado: number, nombre: string) {
         this.codEmpleado = codEmpleado;
+        this.nombre = nombre;
+
     }
 
 }

@@ -1,27 +1,5 @@
 <app-navbar></app-navbar>
-<!-- <div class="container">
-    <div class="row mt-5" *ngIf="producto">
-        <div class="col-md-4 mx-auto">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header text-center">
-                    Detalle
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>ID: </b>{{producto.id}}</li>
-                    <li class="list-group-item"><b>Nombre: </b>{{producto.nombre}}</li>
-                    <li class="list-group-item"><b>Precio: </b>{{producto.precio}}€</li>
-                    <li class="list-group-item"><b>Id Categoria: </b>{{producto.idCategoria}}</li>
-                    <li class="list-group-item"><b>Id Proveedor: </b>{{producto.idProveedor}}</li>
-                </ul>
-                <div class="card-footer">
-                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i
-                            class="fas fa-arrow-alt-circle-left"></i> Volver</button>
-                </div>
-            </div>
 
-        </div>
-    </div>
-</div> -->
 
 <dx-scroll-view class="scroll-viewer">
     <div class="row flex-wrap principal">
@@ -29,7 +7,7 @@
             <dx-form class="form" *ngIf="producto" labelMode="floating" [formData]="producto">
                 <dxi-item itemType="group">
                     <dxi-item itemType="group" caption="PRODUCTO">
-                        <dxi-item dataField="id" editorType=" dxTextBox"
+                        <dxi-item dataField="id" editorType="dxTextBox"
                             [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
                             <dxo-label [visible]="false" text="ID"></dxo-label>
                         </dxi-item>
@@ -54,7 +32,16 @@
                     </dxi-item>
                 </dxi-item>
             </dx-form>
-            <dx-form class="form" *ngIf="categoria" labelMode="floating" [formData]="categoria">
+            <button class="btn btn btn-outline-success form-button"
+                style="width: 100%; border: 1px solid #198754; margin-top: 10px;"
+                (click)="modificarProducto(producto!.id)">Modificar
+                producto</button>
+            <button class="btn btn btn-outline-danger form-button"
+                style="width: 100%; border: 1px solid #DC3545; margin-top: 10px;"
+                (click)="borrarProducto(producto!.id)">Eliminar
+                producto</button>
+            <dx-form class="form" *ngIf="categoria" labelMode="floating" [formData]="categoria"
+                style="margin-top: 10px;">
                 <dxi-item itemType="group">
                     <dxi-item itemType="group" caption="CATEGORIA">
                         <dxi-item dataField="id" editorType="dxTextBox"

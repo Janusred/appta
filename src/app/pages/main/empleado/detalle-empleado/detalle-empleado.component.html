@@ -1,22 +1,26 @@
 <app-navbar></app-navbar>
-<div class="container">
-    <div class="row mt-5" *ngIf="empleado">
-        <div class="col-md-4 mx-auto">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header text-center">
-                    Detalle
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>ID: </b>{{empleado.id}}</li>
-                    <li class="list-group-item"><b>Nombre: </b>{{empleado.nombre}}</li>
-                    <li class="list-group-item"><b>Cod. Empleado: </b>{{empleado.codEmpleado}}</li>
-                </ul>
-                <div class="card-footer">
-                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i
-                            class="fas fa-arrow-alt-circle-left"></i> Volver</button>
-                </div>
-            </div>
 
-        </div>
-    </div>
+<div class="center">
+    <dx-form class="form" *ngIf="empleado" labelMode="floating" [formData]="empleado" style="margin-top: 10px;">
+        <dxi-item itemType="group">
+            <dxi-item itemType="group" caption="EMPLEADO">
+                <dxi-item dataField="codEmpleado" editorType="dxTextBox"
+                    [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                    <dxo-label [visible]="false" text="Cod. Empleado"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="nombre" editorType="dxTextBox"
+                    [editorOptions]="{ stylingMode: 'filled', readOnly: true }">
+                    <dxo-label [visible]="false" text="Nombre"></dxo-label>
+                </dxi-item>
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+    <button class="btn btn-outline-success form-button"
+        style="border: 1px solid #198754; width: 100%;  margin-top: 10px; max-width: 1000px;"
+        (click)="modificarEmpleado(empleado!.codEmpleado)">Modificar
+        empleado</button>
+    <button class="btn btn-outline-danger form-button"
+        style="border: 1px solid #DC3545; width: 100%; margin-top: 10px; max-width: 1000px;"
+        (click)="borrarEmpleado(empleado!.codEmpleado)">Eliminar
+        empleado</button>
 </div>

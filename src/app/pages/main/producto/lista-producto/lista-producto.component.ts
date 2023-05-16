@@ -53,33 +53,5 @@ export class ListaProductoComponent implements OnInit {
     const idProducto = e.data.id;
     this.router.navigate(['/detalleProducto/', idProducto])
   }
-  borrar(id: number): void {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'No hay vuelta atrás',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sip',
-      cancelButtonText: 'Nops'
-    }).then((result) => {
-      if (result.value) {
-        this.productoService.delete(id).subscribe(res => this.cargarProductos());
-        Swal.fire(
-          'OK',
-          'Producto eliminado',
-          'success'
-        );
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'Producto a salvo',
-          'error'
-        );
-      }
-    });
-  }
-
 
 }
