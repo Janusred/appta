@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductoService } from '../../../../services/producto.service';
+import { ProductoService, ProveedorService, CategoriaService } from '@services';
 import { Producto } from '../../../../models/producto';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -7,8 +7,6 @@ import { NavbarComponent } from 'src/app/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Proveedor } from 'src/app/models/proveedor';
-import { ProveedorService } from '../../../../services/proveedor.service';
-import { CategoriaService } from '../../../../services/categoria.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Categoria } from 'src/app/models/categoria';
 
@@ -48,10 +46,10 @@ export class EditarProductoComponent implements OnInit {
     this.cargarCategorias();
     const id = this.activatedRoute.snapshot.params['id'];
     this.productoService.detail(id).subscribe(
-      data => {
+      (data: any) => {
         this.producto = data;
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });
@@ -62,22 +60,22 @@ export class EditarProductoComponent implements OnInit {
 
   cargarProveedores(): void {
     this.proveedorService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.proveedores = data;
         this.listaVaciaProveedores = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaProveedores = err.error.message;
       }
     );
   }
   cargarCategorias(): void {
     this.categoriaService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.categorias = data;
         this.listaVaciaCategorias = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaCategorias = err.error.message;
       }
     );
@@ -86,14 +84,14 @@ export class EditarProductoComponent implements OnInit {
     const idProducto: number = this.producto!.id;
     const id = this.activatedRoute.snapshot.params['id'];
     this.productoService.update(id, this.producto!).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
 
         this.router.navigate(['/detalleProducto/', idProducto])
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error, no se ha modificado el producto', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

@@ -1,7 +1,5 @@
-import { ProveedorService } from '../../../../services/proveedor.service';
-import { CategoriaService } from '../../../../services/categoria.service';
+import { ProveedorService, CategoriaService, ProductoService } from '@services';
 import { Producto } from '../../../../models/producto';
-import { ProductoService } from '../../../../services/producto.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -58,22 +56,22 @@ export class NuevoProductoComponent implements OnInit {
 
   cargarProveedores(): void {
     this.proveedorService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.proveedores = data;
         this.listaVaciaProveedores = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaProveedores = err.error.message;
       }
     );
   }
   cargarCategorias(): void {
     this.categoriaService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.categorias = data;
         this.listaVaciaCategorias = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaCategorias = err.error.message;
       }
     );
@@ -81,13 +79,13 @@ export class NuevoProductoComponent implements OnInit {
   onCreate(): void {
     const producto = new Producto(this.nombre, this.precio!, this.idProveedor!, this.idCategoria!, this.cantidad);
     this.productoService.save(producto).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/listaProducto']);
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

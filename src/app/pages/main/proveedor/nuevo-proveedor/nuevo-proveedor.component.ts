@@ -1,4 +1,4 @@
-import { ProveedorService } from '../../../../services/proveedor.service';
+import { ProveedorService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -38,13 +38,13 @@ export class NuevoProveedorComponent implements OnInit {
   onCreate(): void {
     const proveedor = new Proveedor(this.nombre, this.empresa, this.email, this.telefono!, this.direccion, this.ciudad, this.codigoPostal!);
     this.proveedorService.save(proveedor).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/listaProveedor']);
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

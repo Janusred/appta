@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '@services';
 import { SidebarModule } from 'primeng/sidebar';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
 

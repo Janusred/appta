@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import * as esMessages from "devextreme/localization/messages/es.json";
+import { locale, loadMessages } from "devextreme/localization";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+
+  constructor() {
+    loadMessages(esMessages);
+    locale(navigator.language);
+  }
 }

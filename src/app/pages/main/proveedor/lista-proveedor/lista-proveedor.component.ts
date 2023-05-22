@@ -1,4 +1,4 @@
-import { ProveedorService } from '../../../../services/proveedor.service';
+import { ProveedorService } from '@services';
 import { Proveedor } from '../../../../models/proveedor';
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
@@ -36,11 +36,11 @@ export class ListaProveedorComponent implements OnInit {
 
   cargarProveedores(): void {
     this.proveedorService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.proveedores = data;
         this.listaVacia = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVacia = err.error.message;
       }
     );

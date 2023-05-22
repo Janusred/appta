@@ -1,4 +1,4 @@
-import { EmpleadoService } from '../../../../services/empleado.service';
+import { EmpleadoService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -41,13 +41,13 @@ export class NuevoEmpleadoComponent implements OnInit {
   onCreate(): void {
     const empleado = new Empleado(this.codEmpleado!, this.nombre);
     this.empleadoService.save(empleado).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/listaEmpleado']);
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

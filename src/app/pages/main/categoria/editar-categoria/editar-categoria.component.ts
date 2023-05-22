@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoriaService } from '../../../../services/categoria.service';
+import { CategoriaService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
@@ -32,10 +32,10 @@ export class EditarCategoriaComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];
     this.categoriaService.detail(id).subscribe(
-      data => {
+      (data: any) => {
         this.categoria = data;
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });
@@ -48,13 +48,13 @@ export class EditarCategoriaComponent implements OnInit {
     const idCategoria: number = this.categoria!.id;
     const id = this.activatedRoute.snapshot.params['id'];
     this.categoriaService.update(id, this.categoria!).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/detalleCategoria/', idCategoria])
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProveedorService } from '../../../../services/proveedor.service';
+import { ProveedorService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Proveedor } from '../../../../models/proveedor';
@@ -32,10 +32,10 @@ export class DetalleProveedorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];
     this.proveedorService.detail(id).subscribe(
-      data => {
+      (data: any) => {
         this.proveedor = data;
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

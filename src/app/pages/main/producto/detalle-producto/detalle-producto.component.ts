@@ -1,7 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductoService } from '../../../../services/producto.service';
-import { ProveedorService } from '../../../../services/proveedor.service';
-import { CategoriaService } from '../../../../services/categoria.service';
+import { ProductoService, ProveedorService, CategoriaService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { DxBoxModule, DxButtonModule, DxFormModule, DxScrollViewModule } from 'devextreme-angular';
 import { ToastrService } from 'ngx-toastr';
@@ -44,31 +42,29 @@ export class DetalleProductoComponent implements OnInit {
   ngOnInit(): void {
     const idProducto = this.activatedRoute.snapshot.params['id'];
     this.productoService.detail(idProducto).subscribe(
-      data => {
+      (data: any) => {
         this.producto = data;
-        this.proveedorService.detail(this.producto.idProveedor).subscribe(
+        this.proveedorService.detail(this.producto!.idProveedor).subscribe(
           proveedor => {
             this.proveedor = proveedor;
           },
-          err => {
+          (err: any) => {
             this.toastr.error(err.error.message, 'Error', {
               timeOut: 3000, positionClass: 'toast-bottom-left',
             });
             this.volver();
           }
         );
-        this.categoriaService.detail(this.producto.idCategoria).subscribe(
+        this.categoriaService.detail(this.producto!.idCategoria).subscribe(
           categoria => {
             this.categoria = categoria;
-            console.log(categoria.id);
-            console.log(categoria.nombre)
           },
-          err => {
+          (err: any) => {
             console.error(err);
           }
         );
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

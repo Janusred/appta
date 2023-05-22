@@ -1,10 +1,8 @@
-import { ProductoService } from '../../../../services/producto.service';
+import { ProductoService, FormatService } from '@services';
 import { Producto } from '../../../../models/producto';
 import { Component, OnInit } from '@angular/core';
 import { DxDataGridModule } from 'devextreme-angular';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
-
-import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
@@ -30,6 +28,7 @@ export class ListaProductoComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
+    protected formatService: FormatService,
     private router: Router
   ) { }
 
@@ -39,11 +38,11 @@ export class ListaProductoComponent implements OnInit {
 
   cargarProductos(): void {
     this.productoService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.productos = data;
         this.listaVacia = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVacia = err.error.message;
       }
     );

@@ -1,9 +1,7 @@
-import { EmpleadoService } from '../../../../services/empleado.service';
+import { EmpleadoService } from '@services';
 import { Empleado } from 'src/app/models/empleado';
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
-
-import Swal from 'sweetalert2';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DxDataGridModule } from 'devextreme-angular';
@@ -43,11 +41,11 @@ export class ListaEmpleadoComponent implements OnInit {
   }
   cargarEmpleados(): void {
     this.empleadoService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.empleados = data;
         this.listaVacia = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVacia = err.error.message;
       }
     );

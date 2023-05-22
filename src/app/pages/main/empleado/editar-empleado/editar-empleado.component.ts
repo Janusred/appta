@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmpleadoService } from '../../../../services/empleado.service';
+import { EmpleadoService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
@@ -32,10 +32,10 @@ export class EditarEmpleadoComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];
     this.empleadoService.detail(id).subscribe(
-      data => {
+      (data: any) => {
         this.empleado = data;
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });
@@ -48,13 +48,13 @@ export class EditarEmpleadoComponent implements OnInit {
     const codEmpleado = this.empleado!.codEmpleado;
     const id = this.activatedRoute.snapshot.params['id'];
     this.empleadoService.update(id, this.empleado!).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/detalleEmpleado/', codEmpleado])
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

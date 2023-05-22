@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProveedorService } from '../../../../services/proveedor.service';
+import { ProveedorService } from '@services';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
@@ -31,10 +31,10 @@ export class EditarProveedorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];
     this.proveedorService.detail(id).subscribe(
-      data => {
+      (data: any) => {
         this.proveedor = data;
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });
@@ -47,13 +47,13 @@ export class EditarProveedorComponent implements OnInit {
     const idProveedor: number = this.proveedor!.id;
     const id = this.activatedRoute.snapshot.params['id'];
     this.proveedorService.update(id, this.proveedor!).subscribe(
-      data => {
+      (data: any) => {
         this.toastr.success(data.message, 'OK', {
           timeOut: 3000, positionClass: 'toast-bottom-left'
         });
         this.router.navigate(['/detalleProveedor/', idProveedor])
       },
-      err => {
+      (err: any) => {
         this.toastr.error(err.error.message, 'Error', {
           timeOut: 3000, positionClass: 'toast-bottom-left',
         });

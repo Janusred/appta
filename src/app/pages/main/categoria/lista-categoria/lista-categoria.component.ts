@@ -1,9 +1,7 @@
-import { CategoriaService } from '../../../../services/categoria.service';
+import { CategoriaService } from '@services';
 import { Categoria } from 'src/app/models/categoria';
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
-
-import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { DxDataGridModule } from 'devextreme-angular';
@@ -39,11 +37,11 @@ export class ListaCategoriaComponent implements OnInit {
 
   cargarCategorias(): void {
     this.categoriaService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.categorias = data;
         this.listaVacia = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVacia = err.error.message;
       }
     );

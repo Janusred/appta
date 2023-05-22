@@ -1,5 +1,7 @@
-import { VentaService } from '../../../../services/venta.service';
+import { Inject } from '@angular/core';
+import { VentaService, EmpleadoService, FormatService } from '@services';
 import { Venta } from '../../../../models/venta';
+import { Empleado } from 'src/app/models/empleado';
 import { Component, OnInit } from '@angular/core';
 import { DxDataGridModule } from 'devextreme-angular';
 import { NavbarComponent } from 'src/app/navbar/navbar.component';
@@ -7,6 +9,7 @@ import { NavbarComponent } from 'src/app/navbar/navbar.component';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+
 
 
 @Component({
@@ -24,28 +27,50 @@ import { Router, RouterModule } from '@angular/router';
 export class ListaVentaComponent implements OnInit {
 
   ventas: Venta[] = [];
+  empleados: Empleado[] | null = null;
+  empleado: Empleado | null = null;
 
   listaVaciaVentas = undefined;
+  listaVaciaEmpleados = undefined;
 
   constructor(
     private ventaService: VentaService,
-    private router: Router
+    private empleadoService: EmpleadoService,
+    private router: Router,
+    protected formatService: FormatService
   ) { }
 
   ngOnInit(): void {
     this.cargarVentas();
+
   }
 
   cargarVentas(): void {
-    this.ventaService.lista().subscribe(
-      data => {
-        this.ventas = data;
-        this.listaVaciaVentas = undefined;
+    this.empleadoService.lista().subscribe(
+      (data: any) => {
+        this.empleados = data;
+        this.listaVaciaEmpleados = undefined;
+        this.ventaService.lista().subscribe(
+          (data: any) => {
+            this.ventas = data;
+            this.listaVaciaVentas = undefined;
+
+          },
+          (err: any) => {
+            this.listaVaciaVentas = err.error.message;
+          }
+        );
       },
-      err => {
-        this.listaVaciaVentas = err.error.message;
+      (err: any) => {
+        this.listaVaciaEmpleados = err.error.message;
       }
     );
+  }
+
+  calcularNombreEmpleado(data: any) {
+
+    const empleado = this.empleados!.find(emp => emp?.codEmpleado == data.codEmpleado);
+    return empleado?.nombre;
   }
 
   mostrarDetalle(e: any) {
@@ -79,6 +104,4 @@ export class ListaVentaComponent implements OnInit {
       }
     });
   }
-
-
 }

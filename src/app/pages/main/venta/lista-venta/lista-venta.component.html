@@ -4,10 +4,14 @@
   [wordWrapEnabled]="true">
   <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false"></dxo-editing>
   <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-load-panel text="Cargando datos..." [showPane]="true"></dxo-load-panel>
   <dxo-filter-row [visible]="true"></dxo-filter-row>
   <dxo-header-filter [visible]="true"></dxo-header-filter>
-  <dxi-column dataField="id"></dxi-column>
-  <dxi-column dataField="codEmpleado"></dxi-column>
+  <dxi-column dataField="id" caption="ID"></dxi-column>
+  <dxi-column dataField="codEmpleado" caption="Empleado">
+    <dxo-lookup [dataSource]="empleados" valueExpr="codEmpleado" displayExpr="nombre">
+    </dxo-lookup>
+  </dxi-column>
   <dxi-column dataField="metodo_pago"></dxi-column>
   <dxi-column dataField="fecha"></dxi-column>
   <dxi-column dataField="total" format="##.00 €"></dxi-column>

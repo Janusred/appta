@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { DxBoxModule, DxDataGridModule, DxFormModule, DxNumberBoxModule, DxPopupModule, DxTextBoxModule } from 'devextreme-angular';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { Producto } from 'src/app/models/producto';
-import { ProductoService } from '../../../services/producto.service';
-import { CategoriaService } from '../../../services/categoria.service';
-import { EmpleadoService } from '../../../services/empleado.service';
-import { VentaService } from '../../../services/venta.service';
+import { ProductoService, CategoriaService, EmpleadoService, VentaService, FormatService } from '@services';
 import { CommonModule } from '@angular/common';
 import { Categoria } from 'src/app/models/categoria';
 import { Empleado } from 'src/app/models/empleado';
@@ -13,7 +10,6 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Venta } from 'src/app/models/venta';
 import { ToastrService } from 'ngx-toastr';
-import { CommaExpr } from '@angular/compiler';
 
 
 
@@ -90,22 +86,35 @@ export class CajaCobroComponent {
   cardPaymentPopupVisible = false;
   // El titulo del popup del pago en tarjeta.
   cardPaymentPopupTitle: string = this.nombreEmpleadoPopup;
+  // El titulo del popup de modificar productos
+  modifyItemsPopupTitle: string = "Modificar productos";
+  // Establece la visibilidad del popup de modificar productos;
+  modifyItemsPopupVisible = false;
   // El tipo de pago registrado actualmente
   tipoPagoRegistrado: string | null = null;
   // El empleado registrado actualmente
   empleadoRegistrado: Empleado | null = null;
-
+  // Establece si el popup de empleado se ha abierto mediante el botón de alta de empleado o de cobrar
+  tipoFuncionEmpleado: boolean = false;
+  //Booleano que devuelve true si la coma se ha presionado.
+  puntoPresionado: boolean = false;
 
 
 
 
   constructor(
     private router: Router,
+    @Inject(VentaService)
     private ventaService: VentaService,
+    @Inject(EmpleadoService)
     private empleadoService: EmpleadoService,
+    @Inject(ProductoService)
     private productoService: ProductoService,
+    @Inject(CategoriaService)
     private categoriaService: CategoriaService,
-    private toastr: ToastrService,
+    @Inject(FormatService)
+    protected formatService: FormatService,
+    private toastr: ToastrService
   ) { }
 
   // Almacena los productos y categorias en sus correspondientes listas al cargar la pagina.
@@ -118,11 +127,11 @@ export class CajaCobroComponent {
   //Carga los empleados en la lista empleados, en caso de no haber ninguno, devuelve un error.
   cargarEmpleados(): void {
     this.empleadoService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.empleados = data;
         this.listaVaciaEmpleados = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaEmpleados = err.error.message;
       }
     );
@@ -131,12 +140,12 @@ export class CajaCobroComponent {
   //Carga los productos en la lista productos, en caso de no haber ninguno, devuelve un error.
   cargarProductos(): void {
     this.productoService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.productos = data;
         this.listaVaciaProductos = undefined;
         this.productosFiltrados = this.productos;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaProductos = err.error.message;
       }
     );
@@ -145,11 +154,11 @@ export class CajaCobroComponent {
   //Carga las categorias en la lista categorias, en caso de no haber ninguna, devuelve un error.
   cargarCategorias(): void {
     this.categoriaService.lista().subscribe(
-      data => {
+      (data: any) => {
         this.categorias = data;
         this.listaVaciaCategorias = undefined;
       },
-      err => {
+      (err: any) => {
         this.listaVaciaCategorias = err.error.message;
       }
     );
@@ -215,19 +224,19 @@ export class CajaCobroComponent {
     return formatter.format(precio);
   }
 
+  //Calcula el total de línea de el datagrid de la caja.
+  calcularTotal(data: any) {
+    return data.cantidad * data.precio;
+  }
   // Muestra la primera ventana emergente al hacer click en el boton de cobrar.
   employeeShowPopup() {
-    if (!this.empleadoRegistrado) {
-      this.employeePopupVisible = true;
-    } else {
-      this.chargeTypeShowPopup();
-    }
-
+    this.employeePopupVisible = true;
   }
 
   // Cierra la primera ventana emergente al hacer click afuera de esta o en el boton de cerrar.
   onEmloyeePopupHiding() {
     this.employeePopupVisible = false;
+    this.tipoFuncionEmpleado = false;
   }
 
   // Muestra la  segunda ventana emergente al hacer click en el boton de cobrar.
@@ -238,6 +247,7 @@ export class CajaCobroComponent {
   // Cierra la segunda ventana emergente al hacer click afuera de esta o en el boton de cerrar.
   onChargeTypePopupHiding() {
     this.chargeTypePopupVisible = false;
+    this.tipoFuncionEmpleado = false;
   }
 
   // Muestra la ventana emergente al hacer click pago en efectivo.
@@ -257,6 +267,7 @@ export class CajaCobroComponent {
     this.pendienteCobroEfectivo = 0;
     this.cambioCobro = 0;
     this.entregadoCobroEfectivo = 0;
+    this.tipoFuncionEmpleado = false;
   }
 
   // Muestra la ventana emergente al hacer click pago en efectivo.
@@ -271,6 +282,7 @@ export class CajaCobroComponent {
     let precioTotal = parseFloat(this.precioTotal.replace(",", ".").replace("€", ""));
     this.entregadoCobroTarjeta = precioTotal;
     this.pendienteCobroTarjeta = this.entregadoCobroTarjeta - precioTotal;
+
   }
 
   // Cierra la segunda ventana emergente al hacer click afuera de esta o en el boton de cerrar.
@@ -280,13 +292,50 @@ export class CajaCobroComponent {
     this.pendienteCobroTarjeta = 0;
     this.cambioCobro = 0;
     this.entregadoCobroEfectivo = 0;
+    this.tipoFuncionEmpleado = false;
+  }
+
+  //Muestra la ventana emergente al hacer click eliminar líneas
+  modifyItemsShowPopup() {
+    this.modifyItemsPopupVisible = true;
+  }
+
+  //Acción de cobar en la caja
+  cobrar() {
+    this.tipoFuncionEmpleado = true;
+    if (!this.empleadoRegistrado) {
+      this.employeePopupVisible = true;
+    } else {
+      this.chargeTypeShowPopup();
+    }
+  }
+
+  // Cierra la primera ventana emergente al hacer click afuera de esta o en el boton de cerrar.
+  modifyItemsPopupHiding() {
+    this.modifyItemsPopupVisible = false;
+    this.modificarProductosSeleccionados();
+  }
+
+  modificarProductosSeleccionados() {
+
+    let precio: number = 0;
+    for (const producto of this.listaProductosSeleccionados) {
+      precio += producto.precio * producto.cantidad;
+    }
+
+    this.precioTotal = this.formatPrecio(precio);
+    this.modifyItemsPopupVisible = false;
+
   }
   //Almacena el empleado seleccionado para poder realizar el cobro.
   registrarEmpleado(empleado: Empleado) {
+    debugger
     this.empleadoRegistrado = empleado;
     if (!this.cardPaymentPopupVisible && !this.cashPaymentPopupVisible) {
+      if (this.tipoFuncionEmpleado) {
+        this.chargeTypeShowPopup();
+      }
       this.onEmloyeePopupHiding();
-      this.chargeTypeShowPopup();
     } else {
       if (this.cardPaymentPopupVisible) {
         this.cardPaymentPopupTitle = "Empleado: " + this.empleadoRegistrado!.nombre;
@@ -315,8 +364,9 @@ export class CajaCobroComponent {
 
   // Actualiza en el tipo de pago efectivo el precio pendiente de cobro y en caso de que el entregado sea mayor al precio total, actualiza el cambio.
   actualizarPrecioEfectivo(e: any) {
+    debugger
     if (typeof (e.target.value != 'number')) {
-      const valorSinFormato = parseFloat(e.target.value);
+      const valorSinFormato = parseFloat(e.target.value.replace(",", "."));
       this.entregadoCobroEfectivo = valorSinFormato;
     }
 
@@ -402,7 +452,7 @@ export class CajaCobroComponent {
   actualizarPrecioTarjeta(e: any) {
     debugger
     if (typeof (e.target.value != 'number')) {
-      const valorSinFormato = parseFloat(e.target.value);
+      const valorSinFormato = parseFloat(e.target.value.replace(",", "."));
       this.entregadoCobroTarjeta = valorSinFormato;
     }
 
@@ -449,7 +499,7 @@ export class CajaCobroComponent {
 
       const venta = new Venta(this.empleadoRegistrado!.codEmpleado, metodo_pago, fechaActual!, precioTotal);
       this.ventaService.save(venta).subscribe(
-        data => {
+        (data: any) => {
           this.toastr.success(data.message, 'OK', {
             timeOut: 3000, positionClass: 'toast-bottom-left'
           });
@@ -469,7 +519,7 @@ export class CajaCobroComponent {
             this.empleadoRegistrado = null;
           }
         },
-        err => {
+        (err: any) => {
           this.toastr.error(err.error.message, 'Error', {
             timeOut: 3000, positionClass: 'toast-bottom-left',
           });
@@ -490,6 +540,13 @@ export class CajaCobroComponent {
   }
   //Abre el popup de empleados para poder cambiar de empleado.
   cambiarEmpleadoPopup() {
+    this.employeePopupVisible = true;
+  }
+  cambiarEmpleado() {
+    this.employeePopupVisible = true;
+  }
+  //Da de alta a un empleado en la caja de cobro
+  altaEmpleado() {
     this.employeePopupVisible = true;
   }
   //Registra que tecla se ha tocado en el teclado en pantalla y simula la pulsacion de esta en el teclado.
@@ -520,18 +577,33 @@ export class CajaCobroComponent {
 
           if (this.cashPaymentPopupVisible) {
             valorBoton = e.target.value;
-            const valor = parseFloat(this.entregadoCobroEfectivo.toString() + valorBoton);
-            this.actualizarPrecioEfectivoTeclado(valor);
+            if (this.puntoPresionado) {
+              const valor = parseFloat(this.entregadoCobroEfectivo.toString() + '.' + valorBoton);
+              this.actualizarPrecioEfectivoTeclado(valor);
+              this.puntoPresionado = false;
+            } else {
+              const valor = parseFloat(this.entregadoCobroEfectivo.toString() + valorBoton);
+              this.actualizarPrecioEfectivoTeclado(valor);
+            }
+
 
           } else if (this.cardPaymentPopupVisible) {
             valorBoton = e.target.value;
-            const valor = parseFloat(this.entregadoCobroTarjeta.toString() + valorBoton);
-            this.actualizarPrecioTarjetaTeclado(valor);
+            if (this.puntoPresionado) {
+              debugger
+              const valor = parseFloat(this.entregadoCobroTarjeta.toString() + '.' + valorBoton);
+              this.actualizarPrecioTarjetaTeclado(valor);
+              this.puntoPresionado = false;
+            } else {
+              const valor = parseFloat(this.entregadoCobroTarjeta.toString() + valorBoton);
+              this.actualizarPrecioTarjetaTeclado(valor);
+            }
+
           }
 
           break;
         case 'comma':
-
+          this.puntoPresionado = true;
           break;
         case 'delete':
           if (this.cashPaymentPopupVisible) {
@@ -545,6 +617,7 @@ export class CajaCobroComponent {
             }
 
           } else if (this.cardPaymentPopupVisible) {
+
             let valorBorrado;
             if (this.entregadoCobroTarjeta.toString().length == 1) {
               valorBorrado = 0;
