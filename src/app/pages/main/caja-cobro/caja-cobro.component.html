@@ -63,28 +63,30 @@
                     <dxi-item class="" [ratio]="6">
                         <div class="container-fluid principal">
                             <div class="d-flex flex-wrap" style="justify-content: center;">
-                                <button class="btn btn-success checkoutButton" (click)="cobrar()">
+                                <button class="btn btn-success checkoutButton" (click)="cobrar()"
+                                    [disabled]="listaProductosSeleccionados.length === 0">
                                     <span>Cobrar</span>
                                 </button>
 
-                                <button class="btn btn-info checkoutButton">
+                                <button class="btn btn-info checkoutButton" disabled>
                                     <span>Añadir Cliente</span>
                                 </button>
                                 <button class="btn btn-info checkoutButton" (click)="altaEmpleado()"
                                     [disabled]="empleadoRegistrado!==null">
                                     <span>Alta empleado</span>
                                 </button>
-                                <button class=" btn btn-info checkoutButton">
+                                <button class="btn btn-info checkoutButton" disabled>
                                     <span>Reimprimir ticket</span>
                                 </button>
                                 <button class="btn btn-info checkoutButton" (click)="cambiarEmpleado()"
                                     [disabled]="empleadoRegistrado===null">
                                     <span>Cambiar empleado</span>
                                 </button>
-                                <button class="btn btn-info checkoutButton" (click)="modifyItemsShowPopup()">
+                                <button class="btn btn-info checkoutButton" (click)="modifyItemsShowPopup()"
+                                    [disabled]="listaProductosSeleccionados.length === 0">
                                     <span>Modificar línea</span>
                                 </button>
-                                <button class="btn btn-warning checkoutButton">
+                                <button class="btn btn-warning checkoutButton" disabled>
                                     <span>Abrir cajon</span>
                                 </button>
                                 <button class="btn btn-danger checkoutButton" (click)="salir()">
