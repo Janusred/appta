@@ -1,12 +1,12 @@
 export class DetalleVenta {
     id?: any;
     idVenta: number;
-    idProducto?: string;
-    cantidad?: string;
+    idProducto?: number;
+    cantidad?: number;
     precio_unitario: number;
     total_linea: number;
 
-    constructor(idVenta: number, idProducto: string, cantidad: string, precio_unitario: number, total_linea: number) {
+    constructor(idVenta: number, idProducto: number, cantidad: number, precio_unitario: number, total_linea: number) {
         this.idVenta = idVenta;
         this.idProducto = idProducto;
         this.cantidad = cantidad;

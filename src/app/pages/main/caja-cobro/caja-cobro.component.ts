@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { DxBoxModule, DxDataGridModule, DxFormModule, DxNumberBoxModule, DxPopupModule, DxTextBoxModule } from 'devextreme-angular';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { Producto } from 'src/app/models/producto';
-import { ProductoService, CategoriaService, EmpleadoService, VentaService, FormatService } from '@services';
+import { ProductoService, CategoriaService, EmpleadoService, VentaService, DetalleVentaService, FormatService } from '@services';
 import { CommonModule } from '@angular/common';
 import { Categoria } from 'src/app/models/categoria';
 import { Empleado } from 'src/app/models/empleado';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Venta } from 'src/app/models/venta';
 import { ToastrService } from 'ngx-toastr';
+import { DetalleVenta } from 'src/app/models/detalle_venta';
 
 
 
@@ -99,6 +100,7 @@ export class CajaCobroComponent {
   //Booleano que devuelve true si la coma se ha presionado.
   puntoPresionado: boolean = false;
 
+  ventaId: number | null = null;
 
 
 
@@ -112,6 +114,8 @@ export class CajaCobroComponent {
     private productoService: ProductoService,
     @Inject(CategoriaService)
     private categoriaService: CategoriaService,
+    @Inject(DetalleVentaService)
+    private detalleVentaService: DetalleVentaService,
     @Inject(FormatService)
     protected formatService: FormatService,
     private toastr: ToastrService
@@ -480,7 +484,6 @@ export class CajaCobroComponent {
   }
 
   crearVenta(): void {
-    debugger
     let cuadroPendienteEfectivo = document.getElementById("pendienteItemEfectivo");
     let cuadroPendienteTarjeta = document.getElementById("pendienteItemTarjeta");
 
@@ -528,6 +531,23 @@ export class CajaCobroComponent {
     }
 
   }
+
+  // crearDetalleVenta() {
+  //   let detalleVenta = new DetalleVenta(1, 2, 2, 2, 5);
+
+  //   this.detalleVentaService.save(detalleVenta).subscribe(
+  //     (data: any) => {
+  //       this.toastr.success('Ok', 'OK', {
+  //         timeOut: 3000, positionClass: 'toast-bottom-left'
+  //       });
+  //     },
+  //     (err: any) => {
+  //       this.toastr.error(err.error.message, 'Error', {
+  //         timeOut: 3000, positionClass: 'toast-bottom-left',
+  //       });
+  //     }
+  //   );
+  // }
   //Vuelve al popup del tipo de cobro
   volverTipoCobro() {
     if (this.cardPaymentPopupVisible) {
@@ -552,7 +572,6 @@ export class CajaCobroComponent {
   //Registra que tecla se ha tocado en el teclado en pantalla y simula la pulsacion de esta en el teclado.
 
   accionesTecladoPantalla(e: any) {
-    debugger
     let valorBoton;
     let input;
     if (this.cashPaymentPopupVisible) {
