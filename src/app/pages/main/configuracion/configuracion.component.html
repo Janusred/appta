@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="center">
+
+    <div class="form">
+        <div class="dx-fieldset">
+            <div class="dx-fieldset-header titulo">Tema general</div>
+            <dx-color-box [(value)]="temaGeneral" applyValueMode="useButtons"
+                (onValueChanged)="cambiarColorGeneral($event)"></dx-color-box>
+
+        </div>
+
+
+        <div class="dx-fieldset">
+            <div class="dx-fieldset-header titulo">Productos</div>
+            <div class="dx-fieldset">
+                <div class="dx-fieldset-header">Borde productos</div>
+                <dx-color-box [(value)]="bordeProductos" applyValueMode="useButtons"
+                    (onValueChanged)="cambiarColorBordeProductos($event)"></dx-color-box>
+
+            </div>
+
+            <div class="dx-fieldset">
+                <div class="dx-fieldset-header">Fondo productos</div>
+                <dx-color-box [(value)]="fondoProductos" applyValueMode="useButtons"
+                    (onValueChanged)="cambiarColorFondoProductos($event)"></dx-color-box>
+
+            </div>
+        </div>
+
+        <div class="dx-fieldset">
+            <div class="dx-fieldset-header titulo">Categorías</div>
+            <div class="dx-fieldset">
+                <div class="dx-fieldset-header">Borde categorías</div>
+                <dx-color-box [(value)]="bordeCategorias" applyValueMode="useButtons"
+                    (onValueChanged)="cambiarColorBordeCategorias($event)"></dx-color-box>
+            </div>
+            <div class="dx-fieldset">
+                <div class="dx-fieldset-header">Fondo categorías</div>
+                <dx-color-box [(value)]="fondoCategorias" applyValueMode="useButtons"
+                    (onValueChanged)="cambiarColorFondoCategorias($event)"></dx-color-box>
+            </div>
+        </div>
+        <dx-button class="colorButtons" text="Tema original" (onClick)="cambiarTemaOriginal()" stylingMode="outlined"
+            type="default"></dx-button>
+        <dx-button class="colorButtons" text="Borrar configuraciones" (onClick)="borrarConfiguraciones()"
+            stylingMode="outlined" type="danger"></dx-button>
+        <dx-button class="colorButtons" style="float: right;" text="Volver" (onClick)="volver()"></dx-button>
+    </div>
+
+</div>

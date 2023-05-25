@@ -1,0 +1,26 @@
+.form {
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.titulo {
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+.colorButtons {
+    margin-top: 10px;
+    margin-right: 10px;
+
+}

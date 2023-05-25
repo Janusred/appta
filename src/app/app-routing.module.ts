@@ -22,6 +22,7 @@ import { NuevoEmpleadoComponent } from './pages/main/empleado/nuevo-empleado/nue
 import { EditarEmpleadoComponent } from './pages/main/empleado/editar-empleado/editar-empleado.component';
 import { ListaVentaComponent } from './pages/main/venta/lista-venta/lista-venta.component';
 import { EditarVentaComponent } from './pages/main/venta/editar-venta/editar-venta.component';
+import { ConfiguracionComponent } from './pages/main/configuracion/configuracion.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,9 @@ const routes: Routes = [
   { path: 'editarVenta/:id', component: EditarVentaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
 
   { path: 'caja', component: CajaCobroComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+
+  { path: 'configuracion', component: ConfiguracionComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+
   //  {path: '**', redirectTo: '', pathMatch: 'full'}
 
 ];

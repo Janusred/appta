@@ -1,33 +1,35 @@
 <app-navbar></app-navbar>
 
 <body>
-        <div class="container-fluid principal">
-                <div class="d-flex flex-wrap" style="justify-content: center">
-                        <button class="btn btn-light option m-3" routerLink="/listaVenta">
+        <div class="container-fluid">
+                <div class=" button-container d-flex flex-wrap" style="margin:auto;">
+                        <button class="dx-button" routerLink="/listaVenta" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/venta.png" width="50px" /><span>Ventas</span>
                         </button>
-                        <button class="btn btn-light option m-3" routerLink="/listaProducto">
-                                <span>Productos</span>
+                        <button class="dx-button" routerLink="/listaProducto" [style.border-color]="selectedColor">
+                                <img src="./../../../assets/images/producto.png" width="50px" /> <span>Productos</span>
                         </button>
-                        <button class="btn btn-light option m-3" routerLink="/listaCategoria">
+                        <button class="dx-button" routerLink="/listaCategoria" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/categoria.png" width="50px" /><span>Categorias</span>
                         </button>
-                        <button class="btn btn-light option m-3" routerLink="/caja">
+                        <button class="dx-button" routerLink="/caja" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/caja.png" width="50px" /><span>Caja</span>
                         </button>
-                        <button class="btn btn-light option m-3" routerLink="/listaEmpleado">
+                        <button class="dx-button" routerLink="/listaEmpleado" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/empleado.png" width="50px" /><span>Empleados</span>
                         </button>
-                        <button class="btn btn-light option m-3" routerLink="/listaProveedor">
+                        <button class="dx-button" routerLink="/listaProveedor" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/proveedor.png"
                                         width="50px" /><span>Proveedores</span>
                         </button>
-                        <button class="btn btn-light option m-3"><span>Arqueo</span></button>
-                        <button class="btn btn-light option m-3">
+                        <button class="dx-button" [style.border-color]="selectedColor"><img
+                                        src="./../../../assets/images/arqueo.png"
+                                        width="50px" /><span>Arqueo</span></button>
+                        <button class="dx-button" routerLink="/configuracion" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/ajustes.png"
                                         width="50px" /><span>Configuración</span>
                         </button>
-                        <button class="btn btn-light option m-3">
+                        <button class="dx-button" [style.border-color]="selectedColor">
                                 <img src="./../../../assets/images/cliente.png" width="50px" /><span>Clientes</span>
                         </button>
                 </div>

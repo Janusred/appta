@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 .dxbox {
     background-color: #F2F2F2;
 }
@@ -7,16 +11,6 @@
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     margin: 5px;
-
-}
-
-
-/* Estilo de todos los botones de la vista */
-.productButtons {
-    aspect-ratio: 1;
-    margin: 10px;
-    width: calc(2vw + 70px);
-    text-align: center;
 
 }
 
@@ -31,6 +25,18 @@
     margin: 30px;
     padding: calc(1vw - 15px);
     font-size: calc(1px + 2vw);
+}
+
+#datagrid {
+    margin: 20px;
+}
+
+.paymentButtons {
+    font-size: 16px;
+}
+
+.font {
+    font: 16px;
 }
 
 /* Resolucion general para todas las pantallas que tengan un alto de mas de 1200 pixeles */
@@ -264,10 +270,19 @@ button {
 }
 
 #titulo {
-    margin: 2%;
+    margin: 10px;
+    text-transform: uppercase;
+    font-size: calc(10px + 1vw);
+
 }
 
 
+#descripcion {
+    margin: 10px;
+    text-transform: uppercase;
+    font-size: calc(10px + 0.5vw);
+
+}
 
 .productName,
 .productCategory {
@@ -281,7 +296,7 @@ button {
 }
 
 #subtotal {
-    font-size: calc(1px + 1vw);
+    font-size: 18px;
     margin: 20px;
     padding: 10px;
     border: 2px solid black
@@ -289,7 +304,7 @@ button {
 
 #precio {
     float: right;
-    font-size: calc(1px + 1vw);
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -304,10 +319,10 @@ button {
 
 #registeredEmployee {
     margin: 20px;
-    font-size: medium;
     border: 2px solid black;
     padding: 10px;
-    font-size: calc(1px + 1vw);
+    font-size: 18px;
+
 }
 
 #registeredEmployeePopup {
@@ -318,4 +333,185 @@ button {
 
 .errorPendiente {
     border: 3px solid red;
+}
+
+.button-container {
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
+.dx-button {
+    flex-basis: calc(100% / 4 - 10px);
+    margin: 5px;
+    height: 100px;
+    font-size: 16px;
+    min-width: 100px;
+    border-radius: 5px;
+}
+
+.dx-button-checkout {
+    flex-basis: calc(100% / 2 - 10px);
+    margin: 5px;
+    height: 80px;
+    font-size: calc(16px);
+    min-width: 100px;
+}
+
+.dx-button-keyboard {
+    flex-basis: calc(100% / 3 - 10px);
+    margin: 5px;
+    height: 80px;
+    font-size: calc(16px);
+    min-width: 50px;
+
+}
+
+.container-checkout {
+    width: 49%;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.container-keyboard {
+    width: 48%;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+
+@media (max-width: 1600px) {
+    .dx-button-checkout {
+
+        height: 70px;
+
+    }
+
+    .dx-button-keyboard {
+
+        height: 70px;
+
+
+    }
+}
+
+@media (max-width: 1200px) {
+    .dx-button-checkout {
+
+        height: 60px;
+
+    }
+
+    .dx-button-keyboard {
+
+        height: 60px;
+
+
+    }
+}
+
+@media (max-width: 1100px) {
+
+
+    .dx-button-checkout {
+        font-size: 14px;
+        flex-basis: calc(100% / 2 - 10px);
+        height: 45px;
+    }
+
+    .dx-button-keyboard {
+        font-size: 14px;
+        flex-basis: calc(100% / 3 - 10px);
+        height: 45px;
+    }
+
+    .container-keyboard {
+        width: 100%;
+    }
+
+    .container-checkout {
+        width: 100%;
+    }
+
+    #registeredEmployee,
+    #subtotal,
+    #precio,
+    .paymentButtons,
+    .font {
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 1000px) {
+    .dx-button {
+        flex-basis: calc(100% / 3 - 10px);
+        margin: 5px;
+        height: 100px;
+        font-size: 16px;
+        min-width: 100px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .dx-button {
+        flex-basis: calc(100% / 2 - 10px);
+        margin: 5px;
+        height: 100px;
+        font-size: 16px;
+        min-width: 100px;
+    }
+
+
+}
+
+@media (max-width: 576px) {
+    .dx-button {
+        font-size: 12px;
+        flex-basis: 100%;
+    }
+
+    .dx-button-checkout {
+        font-size: 12px;
+        flex-basis: 100%;
+
+    }
+
+    .dx-button-keyboard {
+        font-size: 12px;
+        flex-basis: calc(100% / 2 - 10px);
+    }
+
+    .container-keyboard {
+        width: 100%;
+    }
+
+    .container-checkout {
+        width: 100%;
+
+    }
+
+    #registeredEmployee,
+    #subtotal,
+    #precio,
+    .paymentButtons,
+    .font {
+        font-size: 12px;
+    }
+}
+
+@media (max-height: 768px) {
+    .dx-button-checkout {
+        font-size: 14px;
+        height: 45px;
+    }
+
+    .dx-button-keyboard {
+        font-size: 12px;
+        height: 45px;
+    }
+
+    #datagrid {
+        margin: 5px;
+    }
 }

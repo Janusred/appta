@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { DxBoxModule, DxDataGridModule, DxFormModule, DxNumberBoxModule, DxPopupModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxBoxModule, DxButtonModule, DxDataGridModule, DxFormModule, DxNumberBoxModule, DxPopupModule, DxTextBoxModule } from 'devextreme-angular';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { Producto } from 'src/app/models/producto';
-import { ProductoService, CategoriaService, EmpleadoService, VentaService, DetalleVentaService, FormatService } from '@services';
+import { ProductoService, CategoriaService, EmpleadoService, VentaService, DetalleVentaService, FormatService, ColorService } from '@services';
 import { CommonModule } from '@angular/common';
 import { Categoria } from 'src/app/models/categoria';
 import { Empleado } from 'src/app/models/empleado';
@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Venta } from 'src/app/models/venta';
 import { ToastrService } from 'ngx-toastr';
-import { DetalleVenta } from 'src/app/models/detalle_venta';
 
 
 
@@ -31,7 +30,8 @@ import { DetalleVenta } from 'src/app/models/detalle_venta';
     DxBoxModule,
     FormsModule,
     DxNumberBoxModule,
-    DxTextBoxModule
+    DxTextBoxModule,
+    DxButtonModule
   ]
 })
 export class CajaCobroComponent {
@@ -99,9 +99,18 @@ export class CajaCobroComponent {
   tipoFuncionEmpleado: boolean = false;
   //Booleano que devuelve true si la coma se ha presionado.
   puntoPresionado: boolean = false;
-
+  //Registra el id de la venta para crear los detalles de la venta
   ventaId: number | null = null;
-
+  //Almacena el color del tema general seleccionado en la configuración
+  selectedColor = this.colorService.temaGeneral;
+  //Almacena el color del tema seleccionado para los bordes de los productos en la configuración
+  selectedBorderProductColor = this.colorService.bordeProductos;
+  //Almacena el color del tema seleccionado para los fondos de los productos en la configuración
+  selectedBackgroundProductColor = this.colorService.fondoProductos;
+  //Almacena el color del tema seleccionado para los bordes de los productos en la configuración
+  selectedBorderCategoryColor = this.colorService.bordeCategorias;
+  //Almacena el color del tema seleccionado para los fondos de los productos en la configuración
+  selectedBackgroundCategoryColor = this.colorService.fondoCategorias;
 
 
   constructor(
@@ -118,6 +127,8 @@ export class CajaCobroComponent {
     private detalleVentaService: DetalleVentaService,
     @Inject(FormatService)
     protected formatService: FormatService,
+    @Inject(ColorService)
+    protected colorService: ColorService,
     private toastr: ToastrService
   ) { }
 
@@ -126,6 +137,7 @@ export class CajaCobroComponent {
     this.cargarProductos();
     this.cargarCategorias();
     this.cargarEmpleados();
+    this.comprobarColorTema();
   }
 
   //Carga los empleados en la lista empleados, en caso de no haber ninguno, devuelve un error.
@@ -333,7 +345,6 @@ export class CajaCobroComponent {
   }
   //Almacena el empleado seleccionado para poder realizar el cobro.
   registrarEmpleado(empleado: Empleado) {
-    debugger
     this.empleadoRegistrado = empleado;
     if (!this.cardPaymentPopupVisible && !this.cashPaymentPopupVisible) {
       if (this.tipoFuncionEmpleado) {
@@ -651,6 +662,38 @@ export class CajaCobroComponent {
       }
     }
 
+  }
+  // Comprueba si se ha seleccionado algún color del tema en la configuración
+  comprobarColorTema() {
+    if (this.colorService.checkCookieExistence('colorTema')) {
+      this.selectedColor = this.colorService.getCookie('colorTema');
+    } else {
+      this.selectedColor = "#0DCAF0";
+    }
+
+    if (this.colorService.checkCookieExistence('bordeProductos')) {
+      this.selectedBorderProductColor = this.colorService.getCookie('bordeProductos');
+    } else {
+      this.selectedBorderProductColor = "#0DCAF0";
+    }
+
+    if (this.colorService.checkCookieExistence('fondoProductos')) {
+      this.selectedBackgroundProductColor = this.colorService.getCookie('fondoProductos');
+    } else {
+      this.selectedBackgroundProductColor = "#ffffff";
+    }
+
+    if (this.colorService.checkCookieExistence('bordeCategorias')) {
+      this.selectedBorderCategoryColor = this.colorService.getCookie('bordeCategorias');
+    } else {
+      this.selectedBorderCategoryColor = "#0DCAF0";
+    }
+
+    if (this.colorService.checkCookieExistence('fondoCategorias')) {
+      this.selectedBackgroundCategoryColor = this.colorService.getCookie('fondoCategorias');
+    } else {
+      this.selectedBackgroundCategoryColor = "#ffffff";
+    }
   }
   // Boton salir, tambien controla si los popups de pago estan abiertos y actua como boton de cerrar de estos.
   salir() {

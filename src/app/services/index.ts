@@ -6,3 +6,4 @@ export * from './proveedor.service';
 export * from './user.service';
 export * from './venta.service';
 export * from './format.service';
+export * from './color.service';
