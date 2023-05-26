@@ -5,7 +5,6 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { TextBoxModule, } from '@syncfusion/ej2-angular-inputs';
 import { CommonModule } from '@angular/common';
 import { PasswordModule } from 'primeng/password';
 import { Validators } from '@angular/forms';
@@ -73,12 +72,7 @@ export class LoginComponent implements OnInit {
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    TextBoxModule,
-    CommonModule,
-    PasswordModule
-
-
-
+    CommonModule
 
   ],
   declarations: [LoginComponent],
