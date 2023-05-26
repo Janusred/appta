@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3" aria-label="Fourth navbar example">
     <div class="container-fluid">
-        <a class="navbar-brand" type="button" routerLink="/main">MyCloudTPV</a>
+        <a class="navbar-brand fa-solid fa-house" type="button" routerLink="/main"> <span
+                style="margin-left: 10px;">MyCloudTPV</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,6 +9,7 @@
 
         <div class="collapse navbar-collapse w-100" id="navbar">
             <ul class="navbar-nav ms-auto  ">
+
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="router.url === '/listaProducto'" routerLink="/nuevoProducto"><i
                             class="far fa-list-alt"></i>
@@ -35,6 +37,7 @@
                         sesión</a>
                 </li>
             </ul>
+
         </div>
     </div>
 </nav>

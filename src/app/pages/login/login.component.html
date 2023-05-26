@@ -1,33 +1,63 @@
-<body class="fondo">
-    <div class="container min vh-100 d-flex justify-content-center align-items-center ">
+<div class="header">
 
-        <form class="border rounded" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+    <!--Content before waves-->
+    <div class="inner-header flex">
+        <form class="form" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+            <div style="text-align: center;margin-bottom: 20px;">
+                <img src="../../../assets/images/pngwing.com.png" width="100px" class="m-3">
+                <h3 class="text-center pt-3" style="color: black; font-size: 20px;">MyCloudTPV</h3>
+            </div>
 
-            <h3 class="text-center pt-3"><img src="../../../assets/images/pngwing.com.png" width="15%"
-                    class="m-3">MyCloudTPV</h3>
-            <div class="form-floating mb-3 ">
-                <input type="email" class="form-control" id="floatingInput" formControlName="email">
-                <label for="floatingInput"><img src="../../../assets/images/user.png"> <span>Email</span></label>
+            <div class="mb-4">
+                <div class="card flex justify-content-center">
+                    <span class="p-float-label" style="width: 100%;">
+                        <input pInputText style="width: 100%;" type="email" formControlName="email" id="floatingInput"
+                            [required]="true" />
+                        <label for="floatingInput"><img src="../../../assets/images/user.png" />Email</label>
+                    </span>
+                </div>
             </div>
-            <div class="form-floating mb-3">
+            <div class="card flex justify-content-center mb-4 text-danger">
+                <span class="p-float-label" style="width: 100%;">
+                    <input pInputText type="password" style="width: 100%;" formControlName="password"
+                        id="floatingPassword" [required]="true" />
+                    <label for="floatingPassword"><img src="../../../assets/images/password.png">Contraseña</label>
+                </span>
+            </div>
 
-                <input type="password" class="form-control" id="floatingPassword" formControlName="password">
-                <label for="floatingPassword"><img src="../../../assets/images/password.png"> Contraseña</label>
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label> Recordarme</label>
-            </div>
-            <button type="submit" id="loginButton" class="btn btn-primary w-100 mb-2">
+            <button type="submit" id="loginButton" class="btn w-100 mb-2" [disabled]="isFormInvalid()"
+                style="background-color: #227DBD; color: white;">
                 <span class="spinner-border spinner-border-sm" id="spinner" role="status" aria-hidden="true"
                     hidden></span>
                 Acceder
             </button>
         </form>
+
         <div class="card justify-content-center">
             <p-toast class="errorToast" position="bottom-center"
                 [breakpoints]="{'920px': {width: '80%', left: '50%'}}"></p-toast>
         </div>
     </div>
 
-</body>
+    <!--Waves Container-->
+    <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+    <!--Waves end-->
+
+</div>
+<!--Header ends-->
+
+
+<!--Content ends-->
