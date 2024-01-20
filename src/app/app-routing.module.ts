@@ -26,35 +26,35 @@ import { ConfiguracionComponent } from './pages/main/configuracion/configuracion
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'main', component: MainComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'main', pathMatch: 'full', redirectTo: '/main' },
+  { path: 'main', component: MainComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'listaProducto', component: ListaProductoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'detalleProducto/:id', component: DetalleProductoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'nuevoProducto', component: NuevoProductoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'editarProducto/:id', component: EditarProductoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'listaProducto', component: ListaProductoComponent},
+  { path: 'detalleProducto/:id', component: DetalleProductoComponent},
+  { path: 'nuevoProducto', component: NuevoProductoComponent},
+  { path: 'editarProducto/:id', component: EditarProductoComponent},
 
-  { path: 'listaProveedor', component: ListaProveedorComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'detalleProveedor/:id', component: DetalleProveedorComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'nuevoProveedor', component: NuevoProveedorComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'editarProveedor/:id', component: EditarProveedorComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'listaProveedor', component: ListaProveedorComponent},
+  { path: 'detalleProveedor/:id', component: DetalleProveedorComponent },
+  { path: 'nuevoProveedor', component: NuevoProveedorComponent},
+  { path: 'editarProveedor/:id', component: EditarProveedorComponent },
 
-  { path: 'listaCategoria', component: ListaCategoriaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'detalleCategoria/:id', component: DetalleCategoriaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'nuevaCategoria', component: NuevaCategoriaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'editarCategoria/:id', component: EditarCategoriaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'listaCategoria', component: ListaCategoriaComponent },
+  { path: 'detalleCategoria/:id', component: DetalleCategoriaComponent},
+  { path: 'nuevaCategoria', component: NuevaCategoriaComponent },
+  { path: 'editarCategoria/:id', component: EditarCategoriaComponent },
 
-  { path: 'listaEmpleado', component: ListaEmpleadoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'detalleEmpleado/:id', component: DetalleEmpleadoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'nuevoEmpleado', component: NuevoEmpleadoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'editarEmpleado/:id', component: EditarEmpleadoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'listaEmpleado', component: ListaEmpleadoComponent},
+  { path: 'detalleEmpleado/:id', component: DetalleEmpleadoComponent},
+  { path: 'nuevoEmpleado', component: NuevoEmpleadoComponent },
+  { path: 'editarEmpleado/:id', component: EditarEmpleadoComponent },
 
-  { path: 'listaVenta', component: ListaVentaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
-  { path: 'editarVenta/:id', component: EditarVentaComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'listaVenta', component: ListaVentaComponent },
+  { path: 'editarVenta/:id', component: EditarVentaComponent},
 
-  { path: 'caja', component: CajaCobroComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'caja', component: CajaCobroComponent},
 
-  { path: 'configuracion', component: ConfiguracionComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'configuracion', component: ConfiguracionComponent },
 
   //  {path: '**', redirectTo: '', pathMatch: 'full'}
 

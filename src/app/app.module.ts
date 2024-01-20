@@ -10,10 +10,11 @@ import { AppComponent } from './app.component';
 // external
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { FirestoreModule } from '@angular/fire/firestore'; // Correct import for FirestoreModule
 
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     ToastrModule.forRoot(),
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    FirestoreModule, // Correct usage of FirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

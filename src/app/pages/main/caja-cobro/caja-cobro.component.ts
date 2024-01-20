@@ -196,6 +196,8 @@ export class CajaCobroComponent {
     let salir = false;
     if (this.listaProductosSeleccionados.length == 0 || !this.comprobarExiste(producto)) {
       this.listaProductosSeleccionados.push(producto);
+      console.log(producto);
+      
 
     } else {
       while (contador <= this.listaProductosSeleccionados.length && !salir) {
@@ -509,7 +511,7 @@ export class CajaCobroComponent {
       let precioTotal = parseFloat(this.precioTotal.replace(",", ".").replace("€", ""));
       const metodo_pago: string = this.tipoPagoRegistrado == '0' ? "Efectivo" : "Tarjeta"
 
-      const fechaActual = new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const fechaActual = new Date().toLocaleString('es-ES', { timeZone: 'America/Mexico_City', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
       const venta = new Venta(this.empleadoRegistrado!.codEmpleado, metodo_pago, fechaActual!, precioTotal);
       this.ventaService.save(venta).subscribe(

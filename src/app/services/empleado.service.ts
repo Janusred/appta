@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class EmpleadoService {
 
-  empleadoURL = environment.empleadoURL;
+  empleadoURL = 'http://localhost:3000/api/empleado';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoriaService {
 
-  categoriaURL = environment.categoriaURL;
+  categoriaURL = 'http://localhost:3000/api/categoria';
 
   constructor(private httpClient: HttpClient) { }
 

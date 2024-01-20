@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductoService {
 
-  productoURL = environment.productoURL;
+  productoURL = 'http://localhost:3000/api/producto';
 
   constructor(private httpClient: HttpClient) { }
 

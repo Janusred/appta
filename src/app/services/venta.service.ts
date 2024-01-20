@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class VentaService {
 
-  ventaURL = environment.ventaURL;
+  ventaURL = 'http://localhost:3000/api/venta';
 
   constructor(private httpClient: HttpClient) { }
 

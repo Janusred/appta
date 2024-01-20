@@ -18,6 +18,7 @@ import { Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
+  formRegister: FormGroup;  // Agregamos un nuevo formulario para el registro
 
   constructor(
     private userService: UserService,
@@ -27,42 +28,72 @@ export class LoginComponent implements OnInit {
     this.formLogin = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
-    })
+    });
+
+    this.formRegister = new FormGroup({
+      registerEmail: new FormControl('', [Validators.required, Validators.email]),
+      registerPassword: new FormControl('', [Validators.required])
+    });
   }
 
   ngOnInit(): void {
   }
+
   show() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Usuario incorrecto' });
   }
-  onSubmit() {
 
+  onSubmit() {
     let loading = document.getElementById("spinner");
     let loginButton = document.getElementById("loginButton");
     loading!.hidden = false;
     loginButton!.setAttribute("disabled", "disabled");
+
     this.userService.login(this.formLogin.value)
       .then(response => {
         setTimeout(() => {
-          this.router.navigate(['/main'])
+          this.router.navigate(['/main']);
           loading!.hidden = true;
-        }, 1000)
+        }, 1000);
       })
-    setTimeout(() => {
-      debugger
-      let input = document.getElementById("floatingInput");
-      let password = document.getElementById("floatingPassword");
+      .catch(error => {
+        console.error('Error de inicio de sesión:', error);
+        this.show();
+        loading!.hidden = true;
+        loginButton?.removeAttribute("disabled");
+      });
+  }
 
-      input?.classList.add('ng-dirty');
-      password?.classList.add('ng-dirty');
-      loading!.hidden = true;
-      loginButton?.removeAttribute("disabled");
-      this.show();
-    }, 2000)
+  onRegister() {
+    let loading = document.getElementById("spinner");
+    let registerButton = document.getElementById("registerButton");
+    loading!.hidden = false;
+    registerButton!.setAttribute("disabled", "disabled");
+
+    this.userService.register(this.formRegister.value)
+      .then(response => {
+        console.log('Usuario registrado exitosamente:', response);
+        // Puedes hacer algo después de que el usuario se ha registrado
+      })
+      .catch(error => {
+        console.error('Error al registrar usuario:', error);
+        // Puedes manejar el error de registro aquí
+      })
+      .finally(() => {
+        loading!.hidden = true;
+        registerButton?.removeAttribute("disabled");
+      });
   }
 
   isFormInvalid(): boolean {
-    return this.formLogin.invalid || this.formLogin.get('email')!.value === '' || this.formLogin.get('password')!.value === '';
+    return this.formLogin.invalid || this.formLogin.get('email')!.value === '1' || this.formLogin.get('password')!.value === '1';
+  }
+
+  isRegisterFormInvalid(): boolean {
+    return this.formRegister.invalid || this.formRegister.get('registerEmail')!.value === '1' || this.formRegister.get('registerPassword')!.value === '1';
+  }
+  goToRegister() {
+    this.router.navigate(['/register']);  // Reemplaza '/register' con la ruta de tu página de registro
   }
 }
 
@@ -73,13 +104,8 @@ export class LoginComponent implements OnInit {
     ReactiveFormsModule,
     ToastModule,
     CommonModule
-
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent]
 })
-export class LoginModule {
-
-}
-
-
+export class LoginModule { }

@@ -9,27 +9,28 @@ import { Proveedor } from '../models/proveedor';
 })
 export class ProveedorService {
 
-  proveedorURL = environment.proveedorURL;
+  //proveedorURL = environment.proveedorURL;
+  provedorURL = 'http://localhost:3000/api/proveedor';
 
   constructor(private httpClient: HttpClient) { }
 
   public lista(): Observable<Proveedor[]> {
-    return this.httpClient.get<Proveedor[]>(`${this.proveedorURL}`);
+    return this.httpClient.get<Proveedor[]>(`${this.provedorURL}`);
   }
 
   public detail(id: number): Observable<Proveedor> {
-    return this.httpClient.get<Proveedor>(`${this.proveedorURL}${id}`);
+    return this.httpClient.get<Proveedor>(`${this.provedorURL}${id}`);
   }
 
   public save(proveedor: Proveedor): Observable<any> {
-    return this.httpClient.post<any>(`${this.proveedorURL}`, proveedor);
+    return this.httpClient.post<any>(`${this.provedorURL}`, proveedor);
   }
 
   public update(id: number, proveedor: Proveedor): Observable<any> {
-    return this.httpClient.put<any>(`${this.proveedorURL}${id}`, proveedor);
+    return this.httpClient.put<any>(`${this.provedorURL}${id}`, proveedor);
   }
 
   public delete(id: number): Observable<any> {
-    return this.httpClient.delete<any>(`${this.proveedorURL}${id}`);
+    return this.httpClient.delete<any>(`${this.provedorURL}${id}`);
   }
 }

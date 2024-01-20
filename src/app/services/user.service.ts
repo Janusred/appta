@@ -1,9 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Auth, signInWithEmailAndPassword, signOut } from "@angular/fire/auth";
-
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword } from "@angular/fire/auth";
 
 @Injectable({ providedIn: "root" })
-
 export class UserService {
     constructor(private auth: Auth) { }
 
@@ -13,5 +11,19 @@ export class UserService {
 
     logout() {
         return signOut(this.auth);
+    }
+
+    register({ email, password }: any) {
+        return createUserWithEmailAndPassword(this.auth, email, password);
+    }
+
+    updatePassword(newPassword: string) {
+        const user = this.auth.currentUser;
+        
+        if (user) {
+            return updatePassword(user, newPassword);
+        } else {
+            return Promise.reject("No hay usuario autenticado.");
+        }
     }
 }

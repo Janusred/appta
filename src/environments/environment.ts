@@ -4,29 +4,29 @@
 
 export const environment = {
   firebase: {
-    projectId: 'proyecto-tpv-tfg',
-    appId: '1:565752849878:web:a95ef6b1a3706f4669b077',
-    databaseURL: 'https://proyecto-tpv-tfg-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'proyecto-tpv-tfg.appspot.com',
-    apiKey: 'AIzaSyDA_SyIVgHbE8c7zG1Fhk_iHhT2T2alQAg',
-    authDomain: 'proyecto-tpv-tfg.firebaseapp.com',
-    messagingSenderId: '565752849878',
+    projectId: 'proyecto-tpv-tfg-2dd84',
+    appId: '1:959036212586:web:1b654783c758c0c85bd113',
+    databaseURL: 'https://proyecto-tpv-tfg-2dd84-default-rtdb.firebaseio.com',
+    storageBucket: 'proyecto-tpv-tfg-2dd84.appspot.com',
+    apiKey: 'AIzaSyDyKE1mOfy4QNAaZ5ZMiap7ewmeqx-FN0s',
+    authDomain: 'proyecto-tpv-tfg-2dd84.firebaseapp.com',
+    messagingSenderId: '959036212586',
   },
   production: false,
 
-  productoURL: 'https://mycloudtpv.hopto.org:8080/producto/',
-  proveedorURL: 'https://mycloudtpv.hopto.org:8080/proveedor/',
-  categoriaURL: 'https://mycloudtpv.hopto.org:8080/categoria/',
-  empleadoURL: 'https://mycloudtpv.hopto.org:8080/empleado/',
-  ventaURL: 'https://mycloudtpv.hopto.org:8080/venta/',
-  detalleVentaURL: 'https://mycloudtpv.hopto.org:8080/detalleVenta/'
+  //productoURL: 'https://mycloudtpv.hopto.org:8080/producto/',
+  //proveedorURL: 'https://mycloudtpv.hopto.org:8080/proveedor/',
+  //categoriaURL: 'https://mycloudtpv.hopto.org:8080/categoria/',
+  //empleadoURL: 'https://mycloudtpv.hopto.org:8080/empleado/',
+  //ventaURL: 'https://mycloudtpv.hopto.org:8080/venta/',
+  //detalleVentaURL: 'https://mycloudtpv.hopto.org:8080/detalleVenta/'
 
-  // productoURL: 'http://localhost:8080/producto/',
-  // proveedorURL: 'http://localhost:8080/proveedor/',
-  // categoriaURL: 'http://localhost:8080/categoria/',
-  // empleadoURL: 'http://localhost:8080/empleado/',
-  // ventaURL: 'http://localhost:8080/venta/',
-  // detalleVentaURL: 'http://localhost:8080/detalleVenta/'
+   productoURL: 'http://localhost:8080/producto/',
+   proveedorURL: 'http://localhost:8080/proveedor/',
+   categoriaURL: 'http://localhost:8080/categoria/',
+   empleadoURL: 'http://localhost:8080/empleado/',
+   ventaURL: 'http://localhost:8080/venta/',
+   detalleVentaURL: 'http://localhost:8080/detalleVenta/'
 };
 
 /*
